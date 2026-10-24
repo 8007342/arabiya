@@ -25,3 +25,29 @@ Because external Google Cloud OAuth Client IDs cannot be minted inside `wrangler
 
 - **WHEN** a player signs in via Cloud Passport or Google SSO and calls `POST /api/progress`
 - **THEN** the Worker merges their local progress with the cloud SQLite row using monotonic max/union semantics (`MAX(xp)`, `MAX(chapter_index)`, union of unlocked letters, chapters, and character affinity stars for Nūr, Yāsmīn, and Laylā) and returns the unified state
+
+### Requirement: Official Google Button and App-Owned Popup Callback
+
+- The web app SHALL render the official Google Identity Services button on the
+  landing screen and in the save/account dialog, with local play available.
+- Popup credentials SHALL be submitted as same-origin JSON to
+  `POST /api/auth/google`, using a challenge from `GET /api/auth/google/challenge`.
+- The Worker SHALL validate Google's RS256 signature, configured audience,
+  issuer, expiry, subject and nonce before creating a Secure/HttpOnly/SameSite
+  session. Account identity SHALL use `sub`, never email alone. Sessions SHALL
+  expire after 30 days and be revocable by logout.
+- The browser SHALL retain only a cookie-session marker, not Google credentials
+  or Google-session bearer tokens, in preferences. Cached identity alone SHALL
+  NOT imply a confirmed cloud session.
+- Guest progress MAY be merged on first explicit Google sign-in. Progress owned
+  by a previous account SHALL NOT be imported into another account.
+- Sign-in SHALL fail closed with local play available when the public client ID
+  is absent or validation fails. Save status SHALL distinguish local storage,
+  pending/failing upload and acknowledged cloud synchronization.
+- Wrangler SHALL deploy the callback in this project's Worker with `/api/*`.
+  Google OAuth registration/authorized origins SHALL be configured separately.
+  Popup mode SHALL NOT require a redirect URI or a client secret.
+
+The earlier passport requirements describe the legacy backend. The current UI
+uses Google identity rather than offering a shared-default-passcode cloud login.
+Cookie sessions are opaque random tokens, not the earlier proposed HMAC format.

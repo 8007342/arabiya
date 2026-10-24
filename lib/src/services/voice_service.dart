@@ -17,7 +17,8 @@ class VoiceService {
   void speakPanel(ComicPanelData panel) {
     if (isMuted) return;
     final profile = profileFor(panel.speaker);
-    final isBlushing = panel.speakerEmotion == EmotionState.blushing ||
+    final isBlushing =
+        panel.speakerEmotion == EmotionState.blushing ||
         (panel.speaker == CharacterId.tlatoani &&
             panel.tlatoaniEmotion == EmotionState.blushing);
     _synth.speakPanelAsset(
@@ -51,9 +52,9 @@ class VoiceService {
       return;
     }
     const samplePanelByChar = <CharacterId, String>{
-      CharacterId.tlatoani: 'ch1_p1',
-      CharacterId.covi: 'ch1_p2',
-      CharacterId.nur: 'ch1_p3',
+      CharacterId.tlatoani: 'door_push_tlatoani',
+      CharacterId.covi: 'door_arrival_covi',
+      CharacterId.nur: 'door_sign_nur',
       CharacterId.yasmin: 'ch5_p1',
       CharacterId.layla: 'ch9_p1',
     };

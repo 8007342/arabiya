@@ -1,6 +1,8 @@
 // @trace spec:voice-canon
 import 'dart:js_interop';
+
 import 'package:web/web.dart' as web;
+
 import '../data/generated_voice_canon.dart';
 
 class PlatformVoiceSynthesizer {
@@ -34,6 +36,7 @@ class PlatformVoiceSynthesizer {
 
   void _playUrl(String url, {double playbackRate = 1.0}) {
     _ensureUnlockListeners();
+    _pendingAssetUrl = null;
     try {
       _player?.pause();
       final audio = web.HTMLAudioElement();
@@ -41,10 +44,13 @@ class PlatformVoiceSynthesizer {
       audio.volume = 1.0;
       audio.playbackRate = playbackRate.clamp(0.75, 1.35);
       _player = audio;
-      audio.play().toDart.catchError((Object _) {
-        // Browser blocked initial autoplay before first click/tap: queue for instant playback on first gesture!
-        _pendingAssetUrl = url;
-        _pendingRate = playbackRate;
+      audio.play().toDart.catchError((Object error) {
+        // Only autoplay blocking is retried; missing audio must not loop on every tap.
+        if (identical(_player, audio) &&
+            error.toString().contains('NotAllowedError')) {
+          _pendingAssetUrl = url;
+          _pendingRate = playbackRate;
+        }
         return null;
       });
     } catch (_) {}
@@ -56,14 +62,10 @@ class PlatformVoiceSynthesizer {
     required CharacterVoiceProfile profile,
     required bool isBlushing,
   }) {
-    playHarmonicCue(
-      profile: profile,
-      isBlushing: isBlushing,
-      isRewind: false,
-      subtle: true,
-    );
-    final rate = (profile.rate + (isBlushing ? 0.03 : 0.0)).clamp(0.85, 1.15);
-    _playUrl('assets/assets/audio/panels/$panelId.mp3', playbackRate: rate);
+    final revision = kPanelAudioAssetRevisions[panelId];
+    if (revision == null) return;
+    // Timing and expression are authored in the recording; play at its natural rate.
+    _playUrl('assets/assets/audio/panels/$panelId.mp3?v=$revision');
   }
 
   void speakWordAsset({
@@ -71,14 +73,8 @@ class PlatformVoiceSynthesizer {
     required String text,
     required CharacterVoiceProfile profile,
   }) {
-    playHarmonicCue(
-      profile: profile,
-      isBlushing: false,
-      isRewind: false,
-      subtle: true,
-    );
     if (assetPath != null && assetPath.isNotEmpty) {
-      _playUrl('assets/$assetPath', playbackRate: 0.96);
+      _playUrl('assets/$assetPath?v=$kVoiceCanonSealHash');
       return;
     }
     // Fallback to browser SpeechSynthesis if word wasn't in pre-baked manifest
@@ -138,8 +134,10 @@ class PlatformVoiceSynthesizer {
   }
 
   void stop() {
+    _pendingAssetUrl = null;
     try {
       _player?.pause();
+      _player = null;
       web.window.speechSynthesis.cancel();
     } catch (_) {}
   }

@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // Source: assets/voices/voice-manifest.json
 // Pipeline: scripts/voice-pipeline.sh
-// Voice Canon Hash: c50051f3fe590e40
+// Voice Canon Hash: 0a060cf2d7124cc5
 // @trace spec:voice-canon
 
 class CharacterVoiceProfile {
@@ -34,7 +34,7 @@ class CharacterVoiceProfile {
   });
 }
 
-const String kVoiceCanonSealHash = 'c50051f3fe590e40';
+const String kVoiceCanonSealHash = '0a060cf2d7124cc5';
 
 const Map<String, CharacterVoiceProfile> kCharacterVoiceCanon = {
   'tlatoani': CharacterVoiceProfile(
@@ -49,7 +49,7 @@ const Map<String, CharacterVoiceProfile> kCharacterVoiceCanon = {
     timbreWave: 'triangle',
     harmonicCadenceHz: [240,302,360],
     pauseBeforeInsightMs: 90,
-    canonDescription: "Mexican Spanish sage voice (born in Mexico City, formative years in Guadalajara, currently living in Southern California); warm CDMX/Tapatío cadence, rising slightly with a gentle coral-gill flutter when blushing around Nūr, Yāsmīn, or Laylā.",
+    canonDescription: "Warm Spanish sage voice, performed by the bundled Kokoro em_alex neural voice. A specifically Mexican accent remains a casting target, not a verified property of this recording.",
   ),
   'covi': CharacterVoiceProfile(
     id: 'covi',
@@ -63,7 +63,7 @@ const Map<String, CharacterVoiceProfile> kCharacterVoiceCanon = {
     timbreWave: 'sine',
     harmonicCadenceHz: [330,415,494],
     pauseBeforeInsightMs: 60,
-    canonDescription: "Bright, curious, enthusiastic English apprentice voice with playful teasing inflection.",
+    canonDescription: "Bright, curious English apprentice, performed by the bundled Kokoro af_heart neural voice with natural pauses and playful timing.",
   ),
   'nur': CharacterVoiceProfile(
     id: 'nur',
@@ -121,6 +121,75 @@ const Map<String, CharacterVoiceProfile> kCharacterVoiceCanon = {
     pauseBeforeInsightMs: 0,
     canonDescription: "Silent in spoken words; communicates exclusively via emoji speech bubbles paired with procedural harmonic synth bloops.",
   ),
+};
+
+const Map<String, String> kPanelAudioAssetRevisions = {
+  'ch1_p1': '1845609e50bcea0f',
+  'ch1_p2': '553872b7022682f6',
+  'ch1_p3': '191b30c3a987a018',
+  'ch1_p4': '4c747ad87856f685',
+  'ch1_p5': '632cb917267b932b',
+  'ch2_p1': '120687afcca9b6b1',
+  'ch2_p2': '9eae3baa336ed67d',
+  'ch2_p3': 'b5b828fd4b33ab8c',
+  'ch2_p4': 'b17dac9543504231',
+  'ch2_p5': '4b85b1f231508e70',
+  'ch3_p1': '81b0b8309b8d44cc',
+  'ch3_p2': '2a5457330488bc5e',
+  'ch3_p3': 'e1f7644fc041891f',
+  'ch3_p4': '1411c30b67eefef0',
+  'ch3_p5': '3bc3b73ef3cdbc99',
+  'ch4_p1': '6e998891ce9bd101',
+  'ch4_p2': '0b9d728c31886570',
+  'ch4_p3': '68ecb95594b81eff',
+  'ch4_p4': 'e7612a76b60235aa',
+  'ch4_p5': '9a29007fb0ce937c',
+  'ch5_p1': '1daf3e595f00fd2b',
+  'ch5_p2': 'aab663eca56cf160',
+  'ch5_p3': 'b9766c6854715875',
+  'ch5_p4': 'cbdca423860a7337',
+  'ch5_p5': '306e30c7634b9b4d',
+  'ch6_p1': 'd0fd7b6110735f49',
+  'ch6_p2': 'a4141e9199a9ccee',
+  'ch6_p3': 'bfe6456e8b09824c',
+  'ch6_p4': '931db0870a20db99',
+  'ch6_p5': 'f733a7292de5149f',
+  'ch7_p1': '592977a6a5211251',
+  'ch7_p2': 'acd9bc3145ca9d0b',
+  'ch7_p3': '009ef5ecaaddf120',
+  'ch7_p4': '308faa8028415458',
+  'ch7_p5': 'bfb41ca2ff0c6621',
+  'ch8_p1': '689d438d2ef4c2ff',
+  'ch8_p2': '9a3f74e9c58f9209',
+  'ch8_p3': '8af2fff7aaae9cc7',
+  'ch8_p4': '596b64420e6ec019',
+  'ch8_p5': 'c56c81943a85861b',
+  'ch9_p1': 'ef279fe56d76e270',
+  'ch9_p2': 'a66fa921b8ff7d6c',
+  'ch9_p3': '38c0b1604d4b6e7a',
+  'ch9_p4': '7b5566976d2309bc',
+  'ch9_p5': '593d54f47069a572',
+  'ch10_p1': 'ca978a3db1865f36',
+  'ch10_p2': '924005154cad558e',
+  'ch10_p3': 'abacc1f65e4101b1',
+  'ch10_p4': '1c03342c0531cac1',
+  'ch10_p5': 'a09861c379dc402b',
+  'ch11_p1': 'f2e12813aec34efa',
+  'ch11_p2': '1a7acf42b3df1584',
+  'ch11_p3': '48ff63ae21718df7',
+  'ch11_p4': '73b8d2db538eda9b',
+  'ch11_p5': 'cf169fa964940c21',
+  'ch12_p1': '3ecacfb6444db9aa',
+  'ch12_p2': '9a938cba4329652b',
+  'ch12_p3': '4693ce3e3626c1a9',
+  'ch12_p4': '456dd9ffd40ad6ca',
+  'ch12_p5': '8dae7c00a136d4e7',
+  'door_arrival_covi': '838b72d7b1fae02a',
+  'door_sign_nur': '0bf94762ee8df193',
+  'door_push_tlatoani': '34160858db442073',
+  'door_hint_nur': '2c63e7a217348f47',
+  'door_payoff_covi': 'bb31b9f34c71b54c',
+  'door_cafe_tlatoani': '8cd29635d303aaa8',
 };
 
 const Map<String, String> kArabicWordAudioAssets = {

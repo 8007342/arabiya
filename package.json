@@ -11,9 +11,15 @@
     "dev": "wrangler dev --ip 0.0.0.0",
     "deploy": "wrangler deploy",
     "deploy:check": "wrangler deploy --dry-run",
-    "test:worker": "node --test test-worker/*.test.mjs"
+    "test:worker": "node --test test-worker/*.test.mjs",
+    "test:voices": "node scripts/test-voice-pipeline.cjs",
+    "check": "bash scripts/check.sh"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "wrangler": "4.151.2"
+  },
+  "dependencies": {
+    "jose": "^6.2.13"
   }
 }

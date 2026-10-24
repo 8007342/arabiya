@@ -1,3 +1,4 @@
+import { createRemoteJWKSet, jwtVerify } from 'jose';
 // @trace spec:cloud-edge-sync
 // Cloudflare Worker + SQLite Durable Object (`ArabiyaState`) for arabiya.tlatoani.net.
 // Auto-provisions all SQLite tables on first invocation on the Cloudflare Free Tier.
@@ -14,7 +15,28 @@ const json = (data, status = 200, extraHeaders = {}) =>
     headers: { ...JSON_HEADERS, ...extraHeaders },
   });
 
-const MAX_BODY_BYTES = 16384;
+const GOOGLE_KEYS = createRemoteJWKSet(new URL('https://www.googleapis.com/oauth2/v3/certs'));
+const SESSION_SECONDS = 60 * 60 * 24 * 30;
+
+function cookieValue(request, name) {
+  const part = (request.headers.get('cookie') || '').split(';')
+    .map(value => value.trim()).find(value => value.startsWith(`${name}=`));
+  return part ? part.slice(name.length + 1) : '';
+}
+
+export async function verifyGoogleCredential(credential, clientId, nonce, keySet = GOOGLE_KEYS) {
+  const { payload } = await jwtVerify(credential, keySet, {
+    algorithms: ['RS256'], audience: clientId,
+    issuer: ['https://accounts.google.com', 'accounts.google.com'],
+    requiredClaims: ['sub', 'exp', 'iat', 'nonce'],
+  });
+  if (!nonce || payload.nonce !== nonce || typeof payload.sub !== 'string' || !payload.sub) {
+    throw new Error('Invalid sign-in challenge');
+  }
+  return payload;
+}
+
+const MAX_BODY_BYTES = 131072;
 
 async function readJsonBody(request) {
   const ct = (request.headers.get('content-type') || '').toLowerCase();
@@ -68,14 +90,14 @@ function parseSessionToken(request) {
   for (const part of cookie.split(';')) {
     const [k, ...v] = part.trim().split('=');
     if (k === 'arabiya_session' && v.length > 0) {
-      return decodeURIComponent(v.join('='));
+      try { return decodeURIComponent(v.join('=')); } catch { return null; }
     }
   }
   return null;
 }
 
 function makeSessionCookie(token, maxAgeSeconds = 60 * 60 * 24 * 30) {
-  return `arabiya_session=${encodeURIComponent(token)}; Path=/; Max-Age=${maxAgeSeconds}; HttpOnly; SameSite=Lax`;
+  return `arabiya_session=${encodeURIComponent(token)}; Path=/; Max-Age=${maxAgeSeconds}; HttpOnly; Secure; SameSite=Lax`;
 }
 
 function normalizeStringArray(arr, maxLen = 128) {
@@ -88,6 +110,19 @@ function normalizeStringArray(arr, maxLen = 128) {
     }
   }
   return [...out];
+}
+
+export function mergeWritingEvidence(existing, incoming) {
+  const events = new Map();
+  for (const event of [...(Array.isArray(existing) ? existing : []),
+    ...(Array.isArray(incoming) ? incoming : [])]) {
+    if (!event || typeof event !== 'object' || Array.isArray(event) ||
+        typeof event.id !== 'string' || event.id.length < 1 || event.id.length > 100 ||
+        JSON.stringify(event).length > 1024 || events.has(event.id)) continue;
+    events.set(event.id, event);
+  }
+  return [...events.values()].sort((a, b) =>
+    String(a.timestamp || '').localeCompare(String(b.timestamp || '')) || a.id.localeCompare(b.id)).slice(-96);
 }
 
 export function mergeProgressSnapshots(existing, incoming) {
@@ -143,6 +178,9 @@ export function mergeProgressSnapshots(existing, incoming) {
   return {
     currentChapterId,
     currentPanelIndex,
+    doorEpisodeBeat: Number.isSafeInteger(inc.doorEpisodeBeat)
+      ? Math.max(0, Math.min(7, inc.doorEpisodeBeat))
+      : Number(base.doorEpisodeBeat) || 0,
     highestChapterIndex,
     xp,
     streakDays,
@@ -150,12 +188,14 @@ export function mergeProgressSnapshots(existing, incoming) {
     unlockedLetters,
     masteredWords,
     affinities,
+    writingEvidence: mergeWritingEvidence(base.writingEvidence, inc.writingEvidence),
     updatedAt: new Date().toISOString(),
   };
 }
 
 export class ArabiyaState {
-  constructor(state) {
+  constructor(state, env = {}) {
+    this.env = env;
     this.storage = state.storage;
     this.sql = state.storage.sql;
     this.sql.exec(`
@@ -189,8 +229,9 @@ export class ArabiyaState {
     if (!token) return null;
     const rows = [
       ...this.sql.exec(
-        'SELECT u.user_key, u.display_name, u.email, u.auth_provider FROM sessions s JOIN users u ON u.user_key = s.user_key WHERE s.token = ? LIMIT 1',
+        'SELECT u.user_key, u.display_name, u.email, u.auth_provider FROM sessions s JOIN users u ON u.user_key = s.user_key WHERE s.token = ? AND s.created_at > ? LIMIT 1',
         token,
+        new Date(Date.now() - SESSION_SECONDS * 1000).toISOString(),
       ),
     ];
     return rows[0] || null;
@@ -229,6 +270,49 @@ export class ArabiyaState {
   async fetch(request) {
     const url = new URL(request.url);
     const path = url.pathname;
+
+    // JSON-only same-origin mutations protect cookie-authenticated endpoints.
+    if (request.method === 'POST' && request.headers.get('origin') !== url.origin) {
+      return json({ error: 'Same-origin request required' }, 403);
+    }
+
+    if (path === '/api/auth/google/challenge' && request.method === 'GET') {
+      if (!this.env.GOOGLE_CLIENT_ID) return json({ error: 'Google sign-in is not configured yet' }, 503);
+      const existing = cookieValue(request, 'arabiya_google_nonce');
+      const nonce = /^[a-f0-9]{48}$/.test(existing) ? existing : randomToken();
+      return json({ nonce }, 200, {
+        'set-cookie': `arabiya_google_nonce=${nonce}; Path=/api/auth/google; Max-Age=600; HttpOnly; Secure; SameSite=Strict`,
+      });
+    }
+
+    if (path === '/api/auth/google' && request.method === 'POST') {
+      if (!this.env.GOOGLE_CLIENT_ID) return json({ error: 'Google sign-in is not configured yet' }, 503);
+      let body;
+      try { body = await readJsonBody(request); }
+      catch { return json({ error: 'Invalid sign-in request' }, 400); }
+      let claims;
+      try {
+        claims = await verifyGoogleCredential(body.credential, this.env.GOOGLE_CLIENT_ID,
+          cookieValue(request, 'arabiya_google_nonce'));
+      } catch { return json({ error: 'Google sign-in could not be verified. Please try again.' }, 401); }
+      const userKey = `google:${claims.sub}`;
+      const name = String(claims.name || 'Traveler').slice(0, 80);
+      const email = claims.email_verified === true ? String(claims.email || '').slice(0, 254) : '';
+      const now = new Date().toISOString();
+      this.sql.exec(
+        "INSERT INTO users (user_key, display_name, email, auth_provider, created_at) VALUES (?, ?, ?, 'google', ?) ON CONFLICT(user_key) DO UPDATE SET display_name = excluded.display_name, email = excluded.email",
+        userKey, name, email, now,
+      );
+      const token = randomToken();
+      this.sql.exec('INSERT INTO sessions (token, user_key, created_at) VALUES (?, ?, ?)', token, userKey, now);
+      const headers = new Headers(JSON_HEADERS);
+      headers.append('set-cookie', makeSessionCookie(token));
+      headers.append('set-cookie', 'arabiya_google_nonce=; Path=/api/auth/google; Max-Age=0; HttpOnly; Secure; SameSite=Strict');
+      return new Response(JSON.stringify({ authenticated: true,
+        user: { userKey, displayName: name, email, authProvider: 'google' },
+        progress: this.getProgress(userKey),
+      }), { headers });
+    }
 
     if (path === '/api/auth/session' && request.method === 'GET') {
       const token = parseSessionToken(request);

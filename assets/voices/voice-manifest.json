@@ -1,77 +1,150 @@
 {
-  "version": 1,
+  "version": 2,
   "spec": "@trace spec:voice-canon",
-  "description": "Canonical voice profiles for Arabiya characters. Edit this manifest and run `bash scripts/voice-pipeline.sh` to propagate updates to the runtime engine.",
+  "description": "Canonical character profiles and recording recipes. Normal builds verify committed audio offline. Run scripts/voice-pipeline.sh --generate only when authoring neural English/Spanish recordings.",
   "characters": {
     "tlatoani": {
       "id": "tlatoani",
       "displayName": "Tlatoāni",
       "primaryLocale": "es-MX",
-      "fallbackLocales": ["es-MX", "es-US", "es-419"],
+      "fallbackLocales": [
+        "es-MX",
+        "es-US",
+        "es-419"
+      ],
       "pitch": 0.96,
       "rate": 0.98,
       "blushPitchDelta": 0.06,
       "baseFreqHz": 240.0,
       "timbreWave": "triangle",
-      "harmonicCadenceHz": [240, 302, 360],
+      "harmonicCadenceHz": [
+        240,
+        302,
+        360
+      ],
       "pauseBeforeInsightMs": 90,
-      "canonDescription": "Mexican Spanish sage voice (born in Mexico City, formative years in Guadalajara, currently living in Southern California); warm CDMX/Tapatío cadence, rising slightly with a gentle coral-gill flutter when blushing around Nūr, Yāsmīn, or Laylā."
+      "canonDescription": "Warm Spanish sage voice, performed by the bundled Kokoro em_alex neural voice. A specifically Mexican accent remains a casting target, not a verified property of this recording.",
+      "synthesis": {
+        "provider": "kokoro-onnx",
+        "model": "Kokoro-82M-v1.0",
+        "voice": "em_alex",
+        "language": "es",
+        "speed": 0.96
+      },
+      "recordingNote": "Bundled neural Spanish voice; a Mexican accent is not verified."
     },
     "covi": {
       "id": "covi",
       "displayName": "Covi",
       "primaryLocale": "en-US",
-      "fallbackLocales": ["en-GB", "en"],
+      "fallbackLocales": [
+        "en-GB",
+        "en"
+      ],
       "pitch": 1.08,
       "rate": 1.03,
       "blushPitchDelta": 0.04,
       "baseFreqHz": 330.0,
       "timbreWave": "sine",
-      "harmonicCadenceHz": [330, 415, 494],
+      "harmonicCadenceHz": [
+        330,
+        415,
+        494
+      ],
       "pauseBeforeInsightMs": 60,
-      "canonDescription": "Bright, curious, enthusiastic English apprentice voice with playful teasing inflection."
+      "canonDescription": "Bright, curious English apprentice, performed by the bundled Kokoro af_heart neural voice with natural pauses and playful timing.",
+      "synthesis": {
+        "provider": "kokoro-onnx",
+        "model": "Kokoro-82M-v1.0",
+        "voice": "af_heart",
+        "language": "en-us",
+        "speed": 1.0
+      },
+      "recordingNote": "Bundled neural American English voice."
     },
     "nur": {
       "id": "nur",
       "displayName": "Nūr (نُور)",
       "primaryLocale": "ar-AE",
-      "fallbackLocales": ["ar-SA", "ar-001", "ar"],
+      "fallbackLocales": [
+        "ar-SA",
+        "ar-001",
+        "ar"
+      ],
       "pitch": 1.04,
       "rate": 0.88,
       "blushPitchDelta": 0.03,
       "baseFreqHz": 294.0,
       "timbreWave": "sine",
-      "harmonicCadenceHz": [294, 370, 440],
+      "harmonicCadenceHz": [
+        294,
+        370,
+        440
+      ],
       "pauseBeforeInsightMs": 90,
-      "canonDescription": "Poised, crystal-clear vocalized Arabic voice from Dubai with warm Gulf hospitality and oud-inspired resonance."
+      "canonDescription": "Poised, crystal-clear vocalized Arabic voice from Dubai with warm Gulf hospitality and oud-inspired resonance.",
+      "synthesis": {
+        "provider": "preserved-arabic",
+        "voice": "legacy-arabic",
+        "language": "ar",
+        "version": 1
+      }
     },
     "yasmin": {
       "id": "yasmin",
       "displayName": "Yāsmīn (يَاسْمِين)",
       "primaryLocale": "ar-LB",
-      "fallbackLocales": ["ar-JO", "ar-SY", "ar-001", "ar"],
-      "pitch": 1.10,
+      "fallbackLocales": [
+        "ar-JO",
+        "ar-SY",
+        "ar-001",
+        "ar"
+      ],
+      "pitch": 1.1,
       "rate": 0.92,
       "blushPitchDelta": 0.04,
       "baseFreqHz": 349.0,
       "timbreWave": "sine",
-      "harmonicCadenceHz": [349, 440, 523],
+      "harmonicCadenceHz": [
+        349,
+        440,
+        523
+      ],
       "pauseBeforeInsightMs": 75,
-      "canonDescription": "Musical, welcoming Levantine Arabic voice with melodic cadence and jasmine garden warmth."
+      "canonDescription": "Musical, welcoming Levantine Arabic voice with melodic cadence and jasmine garden warmth.",
+      "synthesis": {
+        "provider": "preserved-arabic",
+        "voice": "legacy-arabic",
+        "language": "ar",
+        "version": 1
+      }
     },
     "layla": {
       "id": "layla",
       "displayName": "Laylā (لَيْلَى)",
       "primaryLocale": "ar-EG",
-      "fallbackLocales": ["ar-001", "ar"],
-      "pitch": 1.00,
+      "fallbackLocales": [
+        "ar-001",
+        "ar"
+      ],
+      "pitch": 1.0,
       "rate": 0.95,
       "blushPitchDelta": 0.04,
       "baseFreqHz": 262.0,
       "timbreWave": "triangle",
-      "harmonicCadenceHz": [262, 330, 392],
+      "harmonicCadenceHz": [
+        262,
+        330,
+        392
+      ],
       "pauseBeforeInsightMs": 80,
-      "canonDescription": "Witty, expressive Cairene Arabic voice with cinematic timing and Nile sunset warmth."
+      "canonDescription": "Witty, expressive Cairene Arabic voice with cinematic timing and Nile sunset warmth.",
+      "synthesis": {
+        "provider": "preserved-arabic",
+        "voice": "legacy-arabic",
+        "language": "ar",
+        "version": 1
+      }
     },
     "macron": {
       "id": "macron",
@@ -79,11 +152,16 @@
       "primaryLocale": "zxx",
       "fallbackLocales": [],
       "pitch": 1.35,
-      "rate": 1.20,
-      "blushPitchDelta": 0.10,
+      "rate": 1.2,
+      "blushPitchDelta": 0.1,
       "baseFreqHz": 523.25,
       "timbreWave": "square",
-      "harmonicCadenceHz": [523, 659, 784, 1046],
+      "harmonicCadenceHz": [
+        523,
+        659,
+        784,
+        1046
+      ],
       "pauseBeforeInsightMs": 0,
       "canonDescription": "Silent in spoken words; communicates exclusively via emoji speech bubbles paired with procedural harmonic synth bloops."
     }

@@ -21,10 +21,12 @@
       "/api/*"
     ]
   },
-  "main": "worker/index.mjs",
+  "main": "build/worker/index.mjs",
   "vars": {
     "APP_DOMAIN": "arabiya.tlatoani.net",
-    "GOOGLE_CLIENT_ID": ""
+    // Public Google OAuth web client ID. Register this app origin in Google Cloud.
+    // The same Worker deploys /api/auth/google; no separate callback service.
+    "GOOGLE_CLIENT_ID": "490204137466-0ijru4uds6p3hdnfa66t4gti5ffhephm.apps.googleusercontent.com"
   },
   "durable_objects": {
     "bindings": [

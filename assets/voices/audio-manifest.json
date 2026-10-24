@@ -1,0 +1,1524 @@
+{
+  "version": 1,
+  "neuralModel": {
+    "name": "Kokoro-82M-v1.0",
+    "license": "Apache-2.0",
+    "source": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "downloadBase": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/",
+    "runtime": "kokoro-onnx==0.6.1",
+    "files": {
+      "kokoro-v1.0.onnx": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+      "voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+    }
+  },
+  "arabicNote": "Original Google Arabic recordings are preserved. Legacy panel streams had Spanish translations concatenated; only their original first Arabic stream remains. No translated narration is appended. New short Arabic hint uses the same Arabic provider. Arabic regional accents are not verified.",
+  "panels": {
+    "ch1_p3": {
+      "text": "مَرْحَباً! أَهْلاً بِكُمْ فِي دُبَيّ!",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "9ac9fa7c1b20e79162e87083763a0bd4fb8164ad07ce1248d1f57c02ecfa1091",
+      "audioSha256": "191b30c3a987a018dcd8dfcacff0faec60cf35962697754e8e99e983911055ca",
+      "originalAudioSha256": "21483bfd895c11cd75f10d984203d6409a4c4c94598ad33b41def0cb69ee0d68"
+    },
+    "ch2_p1": {
+      "text": "تَفَضَّلُوا! هٰذِهِ دَار جَمِيلَة.",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "400635b937250559d190fd4e3b27c6fda4a881a309d4059a2511e171e618920b",
+      "audioSha256": "120687afcca9b6b19420b784732c2c30cc6793e0ca5cce4f6a4030582ae75bd1",
+      "originalAudioSha256": "f037ed4d73a5d339c3e3da9bd39a563c7dbeb2d13c1147db7be56aa2f334274b"
+    },
+    "ch2_p5": {
+      "text": "يَا سَلَام! كَلَامُكَ جَمِيل جِدّاً.",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "70bbb7e4ab08913b512fc63977af10f41c5151e548439411f355d73847b549b5",
+      "audioSha256": "4b85b1f231508e70a1c9406e49e8e2af19d239002c93c51ad2c041f3c8226738",
+      "originalAudioSha256": "afbf6686cf90a43aa33348da70fc1bbb7cb76dd0261ed1d418d2461861a74a7a"
+    },
+    "ch3_p1": {
+      "text": "أَهْلاً وَسَهْلاً! اِسْمِي نُور، وَمَعْنَاهُ النُّور.",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "1f9ad55d63e19c687f62fd1fc4787f890116278b5b4bbcbedf0d5ff881846d90",
+      "audioSha256": "81b0b8309b8d44cc3d8f773ff951d419e6e3c43841208fc41affb377c0ea6919",
+      "originalAudioSha256": "8ceea5e131e8fed044af277b77609b1379ab298af2c25b6b803489e3b75fbff0"
+    },
+    "ch3_p4": {
+      "text": "شُكْراً جَزِيلاً! تَفَضَّل القَهْوَة العَرَبِيَّة.",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "ce5b2c4bd876a2932338679282a97a5bfcc3ce821dc6c5d927b169525c494c28",
+      "audioSha256": "1411c30b67eefef0f740d616ef56106d430667a1b79fabf9b975739afa381943",
+      "originalAudioSha256": "54c04ed0528afcb0b8d98f33a3b6bafc1de637edcd2a04eac3300b1a08dd8445"
+    },
+    "ch4_p2": {
+      "text": "مَا شَاءَ اللّٰه! القَمَر وَالشَّمْس.",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "d749843cd415e6e4d8edcad47f0d6d3ebd86ec65b4c7b0ac96ea06a1db08095d",
+      "audioSha256": "0b9d728c318865709736a6e6b872be864c8563af39746a7d39d3560deff55b87",
+      "originalAudioSha256": "fb2f28fed4607ee00b5377a4a9d61bf29b41b171d5cd1d9fee8d5a0017708a8d"
+    },
+    "ch4_p4": {
+      "text": "شْلُونَك؟ أَبْغِي قَهْوَة، مَا عَلَيْك أَمْر.",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "c9438d300193306b19ba65e88abde30e141e3255b8a30fbb5cbc5edbea739526",
+      "audioSha256": "e7612a76b60235aa560736425776803d70d5ab5288460f913a531065cdcfa1ec",
+      "originalAudioSha256": "f2f0e03694c43cc594aa82b8c04885d312b73a11a32abae93a7d5b249621d3f6"
+    },
+    "ch5_p1": {
+      "text": "أَهْلَا وَسَهْلَا! نَوَّرْتُوا المَكْتَبَة! أَنَا يَاسْمِين.",
+      "locale": "ar-LB",
+      "speaker": "yasmin",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "ec8b8a17d8326231965a6502c1e8d67ad75bf5175cd1d98b6b74c0aa530bd62d",
+      "audioSha256": "1daf3e595f00fd2b085b07dcb78a71f3284c77d008e3f55d543b7072844a62f8",
+      "originalAudioSha256": "9af39de4dbdbcf18be968bcb8926acc508e66f1c8375828631a027f436e7ddb7"
+    },
+    "ch5_p3": {
+      "text": "شُو حِلُو! طَاسَة، قَمِيص، وَصِفْر.",
+      "locale": "ar-LB",
+      "speaker": "yasmin",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "f04b89d0aaaa91e33797ad4caa6400916893900bc6823a29e31232122e65404b",
+      "audioSha256": "b9766c68547158753f259d81ee815a4014e96f5ad2526d21644c7da7a9b58425",
+      "originalAudioSha256": "a2d1335c59a07c3fee81ca3b21fb9a94d90b320d63779ca0f5ad1a43c27a3c00"
+    },
+    "ch6_p1": {
+      "text": "يَلَّا نِرْكَب البَاص إِلَى السُّوق!",
+      "locale": "ar-LB",
+      "speaker": "yasmin",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "8935d70daced50f1332de4d271407f0c301d7f66d53cf4f591a3ed18e6222660",
+      "audioSha256": "d0fd7b6110735f49e7791e2cb7bcdf9293648a31c914083f60c0059c3dcb9972",
+      "originalAudioSha256": "cd76ee7ed24d986511c1eccd26822b20d2037354fdc4cbd84353806ebc7118e7"
+    },
+    "ch6_p4": {
+      "text": "عَلَى جَنَب هُون، مْنْ فَضْلَك! قَدِّيش الحِسَاب؟",
+      "locale": "ar-LB",
+      "speaker": "yasmin",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "410006af89f41aaa08a165e57137659ceee38cdd5564a3926532e5eac3cedb1e",
+      "audioSha256": "931db0870a20db9979c884ca8d0270cb7d5fb79763a5ce712ce7ae7a14706f35",
+      "originalAudioSha256": "441404a117e5e91f4b65072d65b17b588790e2d6815b3993abfcb95b465b3336"
+    },
+    "ch7_p2": {
+      "text": "نَوَّرْتِي المَكَان! وَدَمِّك خَفِيف كْتِير.",
+      "locale": "ar-LB",
+      "speaker": "yasmin",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "11f6585696acca70e7f17ae073972718881eaa5be1b1fedbe5d8cab4ab1e359b",
+      "audioSha256": "acd9bc3145ca9d0b15a1e115cf1bb443d5d68b4232eae1fbebc354d5c6be2bac",
+      "originalAudioSha256": "5c69a122150be0a55840abf086ba6343cb69d991eb94e77859be52f0d78b10ad"
+    },
+    "ch7_p3": {
+      "text": "دَمِّك خَفِيف! وَتِكْرَم عَيْنَك.",
+      "locale": "ar-LB",
+      "speaker": "yasmin",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "b27eef7023d9a629d0ff67b0f19eebfe84862e7f814ad1b2051be56183c6386a",
+      "audioSha256": "009ef5ecaaddf1207cba9619472ee0c34978b8098d817b1712fd0edd2286b729",
+      "originalAudioSha256": "c1a186381ab044215685db3121d8ea14623caba0a36a47f8623040901695a1ae"
+    },
+    "ch8_p4": {
+      "text": "أَكِيد! بِكُلّ سُرُور يَا تْلَاتُوَانِي! يَلَّا نِشْرَب شَاي بِالنَّعْنَاع.",
+      "locale": "ar-LB",
+      "speaker": "yasmin",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "9b9595cbf094fb61e1115902a2ca1cb972df677401ea6487b642c6ccc05aef64",
+      "audioSha256": "596b64420e6ec0197cfaf35d28308c8ec9427bfcf23af6177316500d5348a98c",
+      "originalAudioSha256": "cd1a97a62a11212c158305a8112c2ad6bafbe3d8037254f02084ff982ffc65ef"
+    },
+    "ch9_p1": {
+      "text": "يَا أَهْلًا بِيْكُمْ فِي الْقَاهِرَة! أَنَا لَيْلَى. النِّيل وَقْت الْغُرُوب هُوَ أَجْمَل مَكْتَب وَأَجْمَل سِينِمَا فِي الدُّنْيَا!",
+      "locale": "ar-EG",
+      "speaker": "layla",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "348ed269e0bbc8aba95bc517aa72bd13b621aad80cb454dc0b8e4a6c1a88ab3a",
+      "audioSha256": "ef279fe56d76e270ad8a1d1b7638c3914ade1ed7b9fe2655ed18f1851d765c88",
+      "originalAudioSha256": "ef279fe56d76e270ad8a1d1b7638c3914ade1ed7b9fe2655ed18f1851d765c88"
+    },
+    "ch9_p3": {
+      "text": "عَلَيْك نُور يَا تْلَاتُوَانِي! دَه سِرُّ الْجَذْر. خُذْ مَثَلًا جَذْر شِين رَاء بَاء: شَرِبَ، أَشْرَب، وَمَشْرُوب!",
+      "locale": "ar-EG",
+      "speaker": "layla",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "827d0edeedf910808cf75f7d31171820677a3e033ba9325a8bc0294c2f00fbf0",
+      "audioSha256": "38c0b1604d4b6e7a2d3b538cbc4b143899dc724f24053d20a769c5bd80a57d8f",
+      "originalAudioSha256": "38c0b1604d4b6e7a2d3b538cbc4b143899dc724f24053d20a769c5bd80a57d8f"
+    },
+    "ch10_p1": {
+      "text": "إِزَّيُّكُمْ يَا شَبَاب! سَمِعْت إِنُّكُمْ زُرْتُوا نُور فِي دُبَيّ وَيَاسْمِين فِي بَيْرُوت. تَعَالُوا نِفْتَح لَوْحَة تَحْوِيل اللَّهَجَات المَصْرِيَّة!",
+      "locale": "ar-EG",
+      "speaker": "layla",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "f348849960ff9c919ba9af3654b0b89c7bdd6976db7b9b7af2be49678782f5c6",
+      "audioSha256": "ca978a3db1865f36aa1949e363bf8767785c95f012301560c3885461c6de8744",
+      "originalAudioSha256": "ca978a3db1865f36aa1949e363bf8767785c95f012301560c3885461c6de8744"
+    },
+    "ch10_p3": {
+      "text": "بِالظَّبْط يَا كُوفِي! فِي دُبَيّ نُور بِتْقُول أَبْغِي قَهْوَة وَشْلُونِك، وَفِي بَيْرُوت يَاسْمِين بِتْقُول بَدِّي قَهْوَة، كِيفِك وَشُو، وَفِي الْقَاهِرَة أَنَا بَقُول عَايْزَة قَهْوَة، إِزَّيَّك وَإِيه!",
+      "locale": "ar-EG",
+      "speaker": "layla",
+      "provider": "google-translate-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "95d00d97f183224e5466bf94d14678a394fbec6476b2285d4e34bc6b98a8ebb9",
+      "audioSha256": "abacc1f65e4101b1ad698b53987830795394beb26d9422870915691341f08db1",
+      "originalAudioSha256": "7515312eb0faa0f92dcc5b72462fd5a91282335d6491ac19115e1b9e12993a69",
+      "repair": "Complete Arabic line in two word-boundary segments; replaces the legacy truncated recording."
+    },
+    "ch11_p2": {
+      "text": "يَا سَلَام! طَبْعًا أَحِبّ يَا تْلَاتُوَانِي، الكَرْكَدِيه السَّاقِع هِنَا تُحْفَة! وَتَعَالُوا أَوَرِّيكُمْ سِرّ التَّرْجَمَة عَلَى شَاشَة السِّينِمَا قَبْل الفِيلْم.",
+      "locale": "ar-EG",
+      "speaker": "layla",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "648b7825e4ed8c4e5c7d19b375f0372f29d7f3f7e7ec427a227c7f927341a5a4",
+      "audioSha256": "1a7acf42b3df1584be1894fb35d7d187130e1fa342cc5e4e73d467b53029e5d9",
+      "originalAudioSha256": "1a7acf42b3df1584be1894fb35d7d187130e1fa342cc5e4e73d467b53029e5d9"
+    },
+    "ch11_p3": {
+      "text": "فِي السِّينِمَا وَاليُوتْيُوب، المُمَثِّل بِيِتْكَلِّم عَامِّيَّة بَسّ السَّبْتَايْتِل مَكْتُوب بِالفُصْحَى: أُرِيدُ هِيَ بَدِّي وَعَايِز وَأَبْغِي، وَمَاذَا هِيَ شُو وَإِيه، وَالْآنَ هِيَ هَلَّق وَدِلْوَقْتِي وَالْحِين، وَهُنَا هِيَ هُون وَهِنَا!",
+      "locale": "ar-EG",
+      "speaker": "layla",
+      "provider": "google-translate-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "99d80da77ef287e1e63aaafcc35382ea1e7fe51769c77ebf435f4f80c4b4f009",
+      "audioSha256": "48ff63ae21718df7c9a9115dfb5e61dc66858041d533206e0cc52ec6ed1c3d9c",
+      "originalAudioSha256": "8aa1e81fb876f291c3c26e2a838ea3ab1c87b40ef05b4d1481dd12ec693c1704",
+      "repair": "Complete Arabic line in two word-boundary segments; replaces the legacy truncated recording."
+    },
+    "ch12_p1": {
+      "text": "مُفَاجْأَة عَلَى سَطْح النِّيل! نُور جَتْ مِنْ دُبَيّ وَيَاسْمِين جَتْ مِنْ بَيْرُوت عَشَان نِتْفَرَّج سَوَا عَلَى البَثّ المُبَاشِر وَنِحْتِفِل بِرِحْلِتْكُمْ!",
+      "locale": "ar-EG",
+      "speaker": "layla",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "3061e528bd182097dd30cf465b1815b5ed17462e91b261535dc250d4130c0a25",
+      "audioSha256": "3ecacfb6444db9aa6ffdbaf51b2838470c18c9624dc07de31e889f24364f9a45",
+      "originalAudioSha256": "3ecacfb6444db9aa6ffdbaf51b2838470c18c9624dc07de31e889f24364f9a45"
+    },
+    "ch12_p2": {
+      "text": "مَرْحَبَا السَّاع يَا تْلَاتُوَانِي وَيَا كُوفِي! شُوفُوا شَاشَة التِّلِفِزْيُون: مُشَاهِدِينَا أَهْلًا بِكُمْ الْآنَ هُنَا فِي الْقَاهِرَةِ، نَشْرَةُ الْأَخْبَارِ وَمَهْرَجَانُ السِّينِمَا.",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "2dea86fb1fd39c928d06332955ebb1603cc8d61eba6cc4d149c7fb6a879c0063",
+      "audioSha256": "9a938cba4329652b95fa78bba4ebd5783a26aa48efffd3cb71ca151432899612",
+      "originalAudioSha256": "9a938cba4329652b95fa78bba4ebd5783a26aa48efffd3cb71ca151432899612"
+    },
+    "ch12_p3": {
+      "text": "وَهَلَّق عَلَى اليُوتْيُوب، الفْلُوغَر بِيْقُول بِالعَامِّيَّة: بَدِّي وَعَايِز أَوَرِّيكُمْ المَتْحَف وَالسُّوق دِلْوَقْتِي! وَالسَّبْتَايْتِل تَحْتُه مَكْتُوب: أُرِيدُ أَنْ أُرِيَكُمُ الْمَتْحَفَ وَالسُّوقَ الْآنَ!",
+      "locale": "ar-LB",
+      "speaker": "yasmin",
+      "provider": "google-translate-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "8e597cff4c66d2413436541438c7379efab34a9a59c5829fdac72c6277b72b77",
+      "audioSha256": "4693ce3e3626c1a952841d615511bafedf65abd5b68b663fe6fc252a1dc32826",
+      "originalAudioSha256": "38b9a8d33d3f3ca8440b27ad2cdad09712ba31c9269944906307b6a4f0669c0e",
+      "repair": "Complete Arabic line in two word-boundary segments; replaces the legacy truncated recording."
+    },
+    "door_sign_nur": {
+      "text": "بَاب",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "preserved-google-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "7a959f2e3399aef57f27d96e26448bda88a069f4266417d35ed49009b0886958",
+      "audioSha256": "0bf94762ee8df1937cf0fc24859ace8ac5af9428afc80d890bda2d7bb7c24bda",
+      "originalAudioSha256": "0bf94762ee8df1937cf0fc24859ace8ac5af9428afc80d890bda2d7bb7c24bda"
+    },
+    "door_hint_nur": {
+      "text": "جَرِّبْ مِنَ الْجَانِبِ.",
+      "locale": "ar-AE",
+      "speaker": "nur",
+      "provider": "google-translate-arabic",
+      "voice": "legacy-arabic",
+      "contentHash": "c232306ca19f5580a02ce1af946e43554301b98cc7e71fcaa6743f58d8f1e9e2",
+      "audioSha256": "2c63e7a217348f47ab3603ccd36ad002f1bc78101935ce7038dd7547de929d1a",
+      "originalAudioSha256": "2c63e7a217348f47ab3603ccd36ad002f1bc78101935ce7038dd7547de929d1a"
+    },
+    "ch1_p1": {
+      "text": "¡Órale, Covi! Por fin aterrizamos en Dubái desde el sur de California. Mira qué chido está ese letrero sobre la puerta: dice bāb.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "d9f3916ae991a4a51721ffde7a7789e3f80db96e2dfc805e6b8b41f5c6da4e98",
+      "audioSha256": "1845609e50bcea0f6b81719eac3727b947a0d7a7ee289e2715b90310adf9c708",
+      "durationSeconds": 7.531,
+      "sampleRateHz": 24000
+    },
+    "ch1_p2": {
+      "text": "Wait a second! A boat with one dot below is B, and the tall line is A. That spells Bāb!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "2ea2344e651ff501a20161b1b9f359a3ebafefaff982e12adaeb674b6913a75f",
+      "audioSha256": "553872b7022682f6c16f06bfaa6d03fbfbc63e22ee6202490ba3b5c7a3ead24b",
+      "durationSeconds": 5.632,
+      "sampleRateHz": 24000
+    },
+    "ch1_p4": {
+      "text": "¡Marḥaban, Nūr! Qué padre conocerte. ¡Ojalá, in shā’a llāh, podamos ver tu caligrafía ahorita!",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "526e6052f9f1f146a4058e985477bb69a7c8e3e39b1be80c7ecb9fddafbf152d",
+      "audioSha256": "4c747ad87856f6853a73d1479a8ecf920c6a28eb2f90667ca77f3c59917b1533",
+      "durationSeconds": 7.147,
+      "sampleRateHz": 24000
+    },
+    "ch1_p5": {
+      "text": "Whoa Tlatoāni, are your gills turning bright coral because Nūr smiled at you?",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "a37a691c7d233ee82a3576dfcda5dfef0fbab0524c28584c07b5dd52d195b39f",
+      "audioSha256": "632cb917267b932be2691c36d3f1481aed886426d7512d093a9cbb712b33ed83",
+      "durationSeconds": 4.48,
+      "sampleRateHz": 24000
+    },
+    "ch2_p2": {
+      "text": "¡Qué elegancia de sistema! Esas seis letras cortan las palabras largas en bloques fáciles de leer.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "ad650f9096ec89658a38ceb9a7832d2eeef4a1f54043d9dbda235fb53ef1472d",
+      "audioSha256": "9eae3baa336ed67d5b4f5764d37f803cf34f92de2a7a80273a82724f8d2faa0d",
+      "durationSeconds": 5.653,
+      "sampleRateHz": 24000
+    },
+    "ch2_p3": {
+      "text": "Look at the jars on the dock: zayt! Because zāy is a non-connector, it leaves a gap before yā and tā.",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "686230fcd285a550c7d8fea668d1e79717e4521cf6f3e5e8a3fa18084820257f",
+      "audioSha256": "b5b828fd4b33ab8c00f9381d3c5bfc0fa9bb997dcace4ac7766d3abba5133977",
+      "durationSeconds": 6.059,
+      "sampleRateHz": 24000
+    },
+    "ch2_p4": {
+      "text": "Claro, az-zayt es nuestro aceite. Nūr, tu idioma se siente como reencontrar a un viejo amigo.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "f32ac8e33224a102b3b155790a3924899f85eef5125394573c12040145ea5200",
+      "audioSha256": "b17dac9543504231a82950f561bcce4fbcdd3ae0e668a5bee1d902ab509fcdcb",
+      "durationSeconds": 5.824,
+      "sampleRateHz": 24000
+    },
+    "ch3_p2": {
+      "text": "Nūr significa Luz, te queda perfecto. Y mira, sukkar es nuestro azúcar.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "b6281a9d3dcdccac7af0d5b69b822f8701788c5b613e918d5ac3571ebbc5ea80",
+      "audioSha256": "2a5457330488bc5eada1d3c44d155226dbbb8819a1d55414f979420f63842066",
+      "durationSeconds": 4.331,
+      "sampleRateHz": 24000
+    },
+    "ch3_p3": {
+      "text": "Haha, Tlatoāni does not even need sukkar in his tea when talking to Nūr! How do we say thank you?",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "86c0246e4e3056301446fe8df9f61fbfe5d9cbd6c6ed32c38d423c1a93bb1c7f",
+      "audioSha256": "e1f7644fc041891fc369aec9d933ff007c0c3cb50ddcc5df02bfa05f549c23ec",
+      "durationSeconds": 5.525,
+      "sampleRateHz": 24000
+    },
+    "ch3_p5": {
+      "text": "¡Shukran yā Nūr! El café con cardamomo está delicioso.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "479dbc3218f9e41b151436a60d3ed11bf6186dd14b4a90817b6923dca1b38644",
+      "audioSha256": "3bc3b73ef3cdbc9904a0266801cdc8b154b98deb34707d817969290f045ee30a",
+      "durationSeconds": 3.264,
+      "sampleRateHz": 24000
+    },
+    "ch4_p1": {
+      "text": "¡Nūr, acabo de resolver por qué decimos almohada con L, pero azúcar y aceite sin L!",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "066409725398a342137f5d4d2c678d62cc52a24548c3dad1eea23d89a41f243e",
+      "audioSha256": "6e998891ce9bd1018da0c52baf42934ac18708daf007dddf7bc7cb23834fdbb5",
+      "durationSeconds": 5.12,
+      "sampleRateHz": 24000
+    },
+    "ch4_p3": {
+      "text": "That is the coolest memory trick ever! Almohada is Moon, and azúcar is Sun!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "5c25aac476af7ad30fbe204dfeae2ca836e1a54713ec3409e5c0dc4f47933f9e",
+      "audioSha256": "68ecb95594b81eff34f0d5e1cc423749cfdd929b029494c33065555418206443",
+      "durationSeconds": 4.843,
+      "sampleRateHz": 24000
+    },
+    "ch4_p5": {
+      "text": "Abghī gahwa ma‘aki yā Nūr. ¡Quisiera tomar un café contigo antes de nuestro vuelo!",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "37a31fe99ea2fe3bfb38ab331bcf050713f28e7b3558fbfd9990f795287a8454",
+      "audioSha256": "9a29007fb0ce937c368406dae9eb159729746b86fc5fc1a95814f74618bae60a",
+      "durationSeconds": 4.736,
+      "sampleRateHz": 24000
+    },
+    "ch5_p2": {
+      "text": "¡No manches, Yāsmīn! Tu nombre es nuestro jazmín, como en los patios de Guadalajara donde crecí. Y hasta viene de ḥattā.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "3ae29a06bf0ad3ff9834034a40230d0618aa8ed17ecbf0ca9f1dce64417d5def",
+      "audioSha256": "aab663eca56cf1602bdfff33fec3a7d5972058504b6460531dd79d9b467d127a",
+      "durationSeconds": 8.789,
+      "sampleRateHz": 24000
+    },
+    "ch5_p4": {
+      "text": "We officially know all twenty-eight letters of the Arabic alphabet now!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "0cc3e8bc2c73785699a2053538430606d88e5f8e2acacf37ca768e52733021de",
+      "audioSha256": "cbdca423860a73372d64149e6774201b0900ff64f3d26f61a7348e3f1a2eac8e",
+      "durationSeconds": 4.139,
+      "sampleRateHz": 24000
+    },
+    "ch5_p5": {
+      "text": "¡Las veintiocho letras desbloqueadas! Desde ṣifr, cero, hasta uno.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "18e6418a10fcb55afa9cc7c2f8f21790c849dcaab30282c7fda76f5e23059791",
+      "audioSha256": "306e30c7634b9b4d56e62eb6d9b9d84ee3229866d6710a3312233506690d3308",
+      "durationSeconds": 5.568,
+      "sampleRateHz": 24000
+    },
+    "ch6_p2": {
+      "text": "¡Y as-sūq es literalmente nuestro zoco en español! Waddīnī ‘as-sūq.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "0fc4cc99ea61fb208027f4d84c4ebd9635a0b46a1f0b094e29569e7e2441771b",
+      "audioSha256": "a4141e9199a9ccee86f2ad4d81275782b5877956313a943bc0bb947189af8551",
+      "durationSeconds": 3.797,
+      "sampleRateHz": 24000
+    },
+    "ch6_p3": {
+      "text": "There is the café terrace! How do we ask the driver how much it is and hop off right here?",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "f0d5ec0857d4f97abddcc9661b5d4f0380b247eb26b20b2006565bb63d9e3a95",
+      "audioSha256": "bfe6456e8b09824c908256ab75554ad2528bb6a5685ffcd4199555f62e6be7c4",
+      "durationSeconds": 5.013,
+      "sampleRateHz": 24000
+    },
+    "ch6_p5": {
+      "text": "‘Ala janab hōn! Yo pago los tres pasajes, Yāsmīn.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "b555b7ed3bcfa266f78c4a0669562aef72e67360dcf5ad0f3f29e68eff0d8080",
+      "audioSha256": "f733a7292de5149f06e9b0e61c699716ca52977b9666737fa1fa28ba91682f8c",
+      "durationSeconds": 3.029,
+      "sampleRateHz": 24000
+    },
+    "ch7_p1": {
+      "text": "Yāsmīn, Tlatoāni wants to invite you for mint tea with authentic Arab etiquette!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "0e4b40806e2674cea2aa6c4d3e8b667f960f4483680c9f4d98c0390ebc3e0059",
+      "audioSha256": "592977a6a52112518acf3f1cdec992bae9a32559513948a8432d10828d5211bc",
+      "durationSeconds": 4.8,
+      "sampleRateHz": 24000
+    },
+    "ch7_p4": {
+      "text": "Yā Yāsmīn, nawaritī el-makān, wa damik khafīf ktīr!",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "478cdc4d16b786b6bfeac86940af0f80b0542bb841da3ac0dcc52924d4be3cf3",
+      "audioSha256": "308faa8028415458583648118204a65e994fc794d8545c8ac9d75d8866a8b777",
+      "durationSeconds": 3.349,
+      "sampleRateHz": 24000
+    },
+    "ch7_p5": {
+      "text": "Smooth, Tlatoāni, very smooth! Even mācron is fanning your coral gills!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "163db18599762d059bac3755a042a70c741680fbebb64bdc18b3b66a7ce1bcd9",
+      "audioSha256": "bfb41ca2ff0c66214f0aab61e38be19a7eb63cecc217dbf94ede92054efe9258",
+      "durationSeconds": 4.736,
+      "sampleRateHz": 24000
+    },
+    "ch8_p1": {
+      "text": "¡Llegó el momento de la verdad! El verbo nishrab viene de la misma raíz que jarabe y sorbete.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "b2addad1d378d20788819c2b4e4515da8f985a0d979bcdd29ce787d0fbb4001f",
+      "audioSha256": "689d438d2ef4c2ff22d4ea942f0fa4e857c949924eeab90f894db40b23a43744",
+      "durationSeconds": 5.333,
+      "sampleRateHz": 24000
+    },
+    "ch8_p2": {
+      "text": "You have got this, Tlatoāni! Go ask Yāsmīn out for an evening drink on the terrace!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "c6c5ff75c719647959b5275a1ad851c9927ec3b4b43925db9bcef39c655b15ef",
+      "audioSha256": "9a3f74e9c58f920979343f5d0faa3259a0a0bae59134fe8c893b097d4b19e5a0",
+      "durationSeconds": 4.672,
+      "sampleRateHz": 24000
+    },
+    "ch8_p3": {
+      "text": "Yā Yāsmīn, ḥābbe nishrab shī sawa ‘ala s-saṭḥ?",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "10540ba3f2e724a671c5bbfba22d63c757476a3f891325ce8a8f1989307c922d",
+      "audioSha256": "8af2fff7aaae9cc7b7b656373667a37707517492a1bcf54616bfcf231590b77e",
+      "durationSeconds": 7.232,
+      "sampleRateHz": 24000
+    },
+    "ch8_p5": {
+      "text": "¡Wa l-ḥisāb ‘alayya! La invitación corre por mi cuenta.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "5fa30a6b1731af495ac821a8e63f456eb845a661275917bc7f9be2bf8342212b",
+      "audioSha256": "c56c81943a85861b85e6db7d820f4e073bd13841ea0fa89e13476a852e0eb86d",
+      "durationSeconds": 5.419,
+      "sampleRateHz": 24000
+    },
+    "ch9_p2": {
+      "text": "Mucho gusto, Layla. Escuché que dijiste maktab para oficina, y suena igualito a las consonantes de kitab. ¿Es el mismo origen?",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "e657e297880662407342422ac27bcd81bb5ee9fa04cf3b1aec40e87955c250e4",
+      "audioSha256": "a66fa921b8ff7d6cf06afde380d65f64b2fe4b28577a8b2d100ccb33d8dc7561",
+      "durationSeconds": 7.467,
+      "sampleRateHz": 24000
+    },
+    "ch9_p4": {
+      "text": "Whoa, it is like a secret decoder ring! So hisab comes from ha-sin-ba, to count, and amal comes from ayn-mim-lam, to do!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "0b1ec43737d07c63f826e072a7b5707e036eac451e83b3f83da47f97596970e7",
+      "audioSha256": "7b5566976d2309bcbfd98215433adf20c71ba69f9275eca3d46ac1770e785929",
+      "durationSeconds": 7.531,
+      "sampleRateHz": 24000
+    },
+    "ch9_p5": {
+      "text": "Con razón el árabe es tan poético, Layla. En español decimos jarabe gracias a la raíz shin-ra-ba, y ver cómo explicas cada jadhr bajo las velas del Nilo es una obra de arte.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "70996205ed0e8d17a710a45e72820745b125a4d7b1ad2a853c1954fd2147207a",
+      "audioSha256": "593d54f47069a572bb537ec26cb58f3615dd54104caede192c7fd23ff70487c8",
+      "durationSeconds": 10.539,
+      "sampleRateHz": 24000
+    },
+    "ch10_p2": {
+      "text": "Wait—my ears just picked up two cosmic plot twists! In Cairo, you pronounce Jim like a hard g in gold so jamil is gamil, and Qaf in qahwa becomes a glottal stop ahwa!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "efb0393bb4eba850de8e79cd1f5d3f8863e02d1ee7b7ddb5cfa7b6e840758019",
+      "audioSha256": "924005154cad558e75ad50b3852ffda37818a77a41ab7320db20413dfc9aaada",
+      "durationSeconds": 11.477,
+      "sampleRateHz": 24000
+    },
+    "ch10_p4": {
+      "text": "Es como escuchar el español de Ciudad de México, Madrid y Buenos Aires. La escritura nos une y cada acento tiene su encanto. Entonces yo digo: Ana ayiz ahwa, izzayyik ya Layla.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "7e7b4496d84c9dc41ce7abb28fdb030bf2546d791cb678ab825abca871250a29",
+      "audioSha256": "1c03342c0531cac117f1a2c6eda41721aec71de433b2e2b55898ecc3fbacfa23",
+      "durationSeconds": 10.709,
+      "sampleRateHz": 24000
+    },
+    "ch10_p5": {
+      "text": "Hehehe, look at Tlatoani switching effortlessly from Dubai Shlonik to Beirut Kifik to Cairo Izzayyik while his gills turn sunset-coral in every time zone!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "297311b9b5e9db0e5e8d82b7503e93182a25768227c24bf3cf94893a94960fea",
+      "audioSha256": "a09861c379dc402bb5c6fde39b92cc5169bb23f84c9821a32e8197e1948e1a1b",
+      "durationSeconds": 10.027,
+      "sampleRateHz": 24000
+    },
+    "ch11_p1": {
+      "text": "Layla, este cine de arte en Zamalek se ve increíble. Quería preguntarte en tu dialecto: Tihibbi nishrab haga sawa? ¿Tomamos un karkadeh frío antes de tu proyección?",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "c9d3b4ad3aec2ccf9f6432f027bd5295324c437b9d44ad998159eda814ccb726",
+      "audioSha256": "f2e12813aec34efa28b8ebc51a308f4da1c96e2d971b356ea4d0e98110dc7181",
+      "durationSeconds": 9.472,
+      "sampleRateHz": 24000
+    },
+    "ch11_p4": {
+      "text": "Aha! So when Tlatoani whispers Mabsut inni shuftik el-yom over his hibiscus tea and his gills glow neon-rose, the cinema subtitle underneath him reads: Smooth axolotl is overjoyed to see Layla today!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "1810a3a10d7c15b0c7eb639dbf6605b9d428b3fe0b261585a73c5145643d2ae4",
+      "audioSha256": "73b8d2db538eda9b12bcb8511a400641e76fde62a3c523b5f2e1cfdda9741734",
+      "durationSeconds": 13.739,
+      "sampleRateHz": 24000
+    },
+    "ch11_p5": {
+      "text": "Covi, silencio que ya empieza el cortometraje. Pero sí, Layla: Ana mabsut awi inni shuftik el-yom, y el karkadeh va por mi cuenta: Alayya ana!",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "4ff523d2944c79e430c9206dc10bc98f21bb83b5bc881676e0b49c61fd619aa1",
+      "audioSha256": "cf169fa964940c21c9b40754a0a9414f35a429bb8706bbb22ddabf3562860bf4",
+      "durationSeconds": 8.341,
+      "sampleRateHz": 24000
+    },
+    "ch12_p4": {
+      "text": "We actually did it! We can read every single word on that screen from right to left AND understand all three dialects! Also, Tlatoani is surrounded by Nur, Yasmin, and Layla at once—his gills have achieved maximum coral luminosity!",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "1c5900083fa5b69949b337532a3f0610a5d4ff6a23099bd898587c9b9a03b6ac",
+      "audioSha256": "456dd9ffd40ad6cad60008ea2b06c20fd737e0bee616bc120fc7d6f4b5e72cc3",
+      "durationSeconds": 15.189,
+      "sampleRateHz": 24000
+    },
+    "ch12_p5": {
+      "text": "Shukran jazilan, Nur, Yasmin y Layla! Del español de Al-Ándalus a las veintiocho letras del Abjad, y de Dubái y Beirut hasta El Cairo: Mina as-sifri ila al-wahid, nahnu natakallamu al-Arabiyya!",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "2da97df08d825a5f3e93b58aef8ee42dc46e176e670f6cc897cd80bb8b111d8c",
+      "audioSha256": "8dae7c00a136d4e7d13e022185143c87737e091e59ef3666f0c502ca3e00385b",
+      "durationSeconds": 11.243,
+      "sampleRateHz": 24000
+    },
+    "door_arrival_covi": {
+      "text": "One small suitcase. That was the plan.",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "2745f09328ab676aa8d16c7775b100841d668aa72ec4edc5d36a68c1a70de956",
+      "audioSha256": "838b72d7b1fae02a37f002996613fa6c1e680e92ffcd13cfbef0a1471fcd3e0a",
+      "durationSeconds": 2.325,
+      "sampleRateHz": 24000
+    },
+    "door_push_tlatoani": {
+      "text": "Creo que la puerta no habla robot.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "4656a0f66870e70b72fb1dd47ff25c91b9111dcb505a9a9e573567c83418f1e1",
+      "audioSha256": "34160858db442073073d13a907f59b64257af336c5ce38839dc8981abe392b56",
+      "durationSeconds": 2.155,
+      "sampleRateHz": 24000
+    },
+    "door_payoff_covi": {
+      "text": "Excellent. Now the suitcase is the door.",
+      "locale": "en-US",
+      "speaker": "covi",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "af_heart",
+      "contentHash": "0353b95ef168bbfa95f45ec1b259eb07e6b98ab34ff3fcb5645dc805eaf2d42d",
+      "audioSha256": "bb31b9f34c71b54c235eddf7408cdced6d5403060c9cd51c6ba06a0de2a61bfc",
+      "durationSeconds": 2.24,
+      "sampleRateHz": 24000
+    },
+    "door_cafe_tlatoani": {
+      "text": "Esta vez, primero el café.",
+      "locale": "es-MX",
+      "speaker": "tlatoani",
+      "provider": "kokoro-onnx",
+      "model": "Kokoro-82M-v1.0",
+      "voice": "em_alex",
+      "contentHash": "d7b104d8cee73e4e1246712dc0eb3ed192eb4d8c0ff64baa3874c75942be072a",
+      "audioSha256": "8cd29635d303aaa8b107cd3c1e25135d64ba9aa154d1621119f72c95786a77f0",
+      "durationSeconds": 1.771,
+      "sampleRateHz": 24000
+    }
+  },
+  "words": {
+    "2837a6b46dde": {
+      "text": "بَاب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "0bf94762ee8df1937cf0fc24859ace8ac5af9428afc80d890bda2d7bb7c24bda"
+    },
+    "80bab2f1b366": {
+      "text": "مَرْحَباً",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "261cdff0cd0a1cd755f629f4ac6dd0a3007c0bcff8fc86f9cc661b47a7f62f01"
+    },
+    "b6535be3df3e": {
+      "text": "إِنْ شَاءَ اللّٰه",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "153dc353fd07bf96e8e173de7c000a3235377ef958557b2aa55f70cf57496601"
+    },
+    "81329c81d096": {
+      "text": "دَار",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "d48e85aa85ca825f16f7411ea2d6ebee07c7a323a0dc7da04d6b2f4fce38de8b"
+    },
+    "d3f692f10780": {
+      "text": "زَيْت",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "ce4a7522cab242bb519cae98a08239a3efee54e66b5df7a2477fd6e52117c06d"
+    },
+    "25a57ab0461a": {
+      "text": "نُور",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "65808dddbfa6f222a13ea9df878b9098df77f0c2f4d703622074b588b6ac61fc"
+    },
+    "7cd14a495565": {
+      "text": "سُكَّر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "597f3857d6f3c51b801f58ac18309caaf5945dd5df264e8081ae450d1211e46a"
+    },
+    "439683f62112": {
+      "text": "شُكْراً",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "3caef6d8e55975fa550b45515e940e47bfaa78d3d39c50ae879e8f63ea699d21"
+    },
+    "8ecbc237a6a0": {
+      "text": "المِخَدَّة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "8c8e9a8d5c51a92b384466654eb444d3a93db33d98458d83bba3cb423fb32938"
+    },
+    "758358c0c99f": {
+      "text": "الشَّمْس وَالقَمَر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "b3b547d25e2b5ddd791799199fc21236f8b72003eb2b4792db34face6303b36a"
+    },
+    "0ca2b1a92670": {
+      "text": "أَبْغِي قَهْوَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "c143c13d98daa53e94c810ee1faf4f160846edcfde4fb3cab416d540e8606661"
+    },
+    "5ab9164bc274": {
+      "text": "تُوت",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "1285aaf4d679755d4d4f579977868a896453e68cc1520ea3a9e92b2608f56097"
+    },
+    "7ce834bb5d31": {
+      "text": "ثَوْب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "3b368e6dad0d4f5bb4f783a06dfd9080460ce9592344ac503abdc6a5e767f380"
+    },
+    "c3542ba5c17a": {
+      "text": "شُكْراً يَا نُور",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "d9d6a5e031c9bcad8d6c063c586bb6963823a6dbb9bb646d620a693ef70e3bd9"
+    },
+    "f0744cb7cd9b": {
+      "text": "سُكَّر وَزَيْت",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "7b9d6bebaac55b4ed3869189d850e771bd365c592fb0d1954398affe52579a9d"
+    },
+    "dbba69d86e02": {
+      "text": "بَاب الدَّار",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "0ea4ed45e818bfa9cf88be6db5b143e46e4566f66746ea70901abd252555d35e"
+    },
+    "9ff488074af0": {
+      "text": "الشَّمْس",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "771149802293304b3ad7487af4015ce6b2606a2a9b739fc0c146c038c13fae64"
+    },
+    "3642303a25a1": {
+      "text": "أَبْغِي قَهْوَة، مَا عَلَيْك أَمْر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "9b4dfad78c824c866d2bb91b4a527332a6b24026662e8079de98764124201375"
+    },
+    "3c1f1a8ff0f8": {
+      "text": "بَاب المَتْحَف كَبِير",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "49b4d75a53a52ced5102f5c6f7ba812dcd5434ecb83c3544f693d667c5637f01"
+    },
+    "3887d4dcf75b": {
+      "text": "المِخَدَّة فِي الدَّار",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "2e113b53be4bf8bd9651a65d095cd4fb248023db973e70242a7b792092008b13"
+    },
+    "2b6855ed9c0d": {
+      "text": "أَهْلَا وَسَهْلَا",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "dc5b2c9f0f4771024813c05bce815384a86cbe075ab4fb9a5858cbb63b395c3e"
+    },
+    "cce3ea0d180f": {
+      "text": "حَتَّى",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e2afcc10f8efdce58db1ed234948b35124db37868fe0acc90ddbb80475489c3a"
+    },
+    "a067d0ab9424": {
+      "text": "طَاسَة وَقَمِيص",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "dfc3d243ba379ad7d1facbf26c3e7b8c53dadc84502ef92ea0550c3ddd3278c5"
+    },
+    "0541fc4c09fc": {
+      "text": "٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "8e8d7e516e6c4691f297cbcf9df2aaaac5225c1846286a2ad852b27d7e653c4c"
+    },
+    "ee409ccd6c9b": {
+      "text": "عَلَى جَنَب هُون!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e813b2f499cb563eee0b9f1ee6e546376f4d1500c9a362a0be924f61d7d2aa62"
+    },
+    "b2cb11043e5f": {
+      "text": "نَوَّرْتِي المَكَان",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "745fd2ec322e733eb947f248e0758d768c302892e3cc2788f2921ccfa5cbe681"
+    },
+    "59970e61643e": {
+      "text": "دَمِّك خَفِيف!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "ce77439f3ebb9845f7668dc9f9adbc1f708d6e7b7348b9aeb2a96fbc6782f4c0"
+    },
+    "249e779fed5b": {
+      "text": "نِشْرَب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "0323432dce7fdf1f1207ed548274c91e9b44f98b5c82517121fbbead699e82b0"
+    },
+    "9de16124e154": {
+      "text": "حَابَّة نِشْرَب شِي سَوَا؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "26aab396e9ebdb869e18a38f1cbb60466f13880717394787088a81a21f5ed4f9"
+    },
+    "f7511f34bfeb": {
+      "text": "عَلَيَّ!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "545411e6065e1d7771f2f5c6193df4edaccfcc977230551490acb14bc2fd0774"
+    },
+    "77872fb03cdb": {
+      "text": "يَاسْمِين",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "b84fa120b958bd8229c39fb1a9b4738b63022f4e489c6052d861726f402c2f7b"
+    },
+    "0dd60efe45bb": {
+      "text": "طَاسَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "ae1366887e2154bdb89e2266ddb8cdbb22fcfed99336fc97616611d0056812a5"
+    },
+    "5372fe2ccae1": {
+      "text": "خُبْز",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "dd604128ce3f3b88781c2912799e525ac4952827164e4867ee0ef279cd7da697"
+    },
+    "16ff77b5731e": {
+      "text": "قَدِّيش الحِسَاب؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "8a52f278a69deeb65928e3288dc3aa0306dfd71f6d955560e7e0bf38e6cf6d43"
+    },
+    "9eeb15891eeb": {
+      "text": "عَلَى جَنَب هُون، مْنْ فَضْلَك!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "1bb658bff851727669e928407ae3c725c5c4d3a1a821bbe491828c24fd856619"
+    },
+    "c9c8cafd64a7": {
+      "text": "أَنَا فِي المَطَار",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "64c0b5299b543a05a67cd497e4da61399c8391fd38731ac756eed43a108a5161"
+    },
+    "5f0ca50e8819": {
+      "text": "سُكَّر وَحَلِيب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "f2ebeb518501618084bbdafb706e54b210cc14831e2729e5c2f594fe22d7bd05"
+    },
+    "b7bed046e6f0": {
+      "text": "تِكْرَم عَيْنَك",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "58b5370070c5f7709227b3fa13ef2ca61a028fedb496fe2bcd210a0ec5bfb79d"
+    },
+    "3f27cb39bb9d": {
+      "text": "دَمِّك خَفِيف وَنَوَّرْتِي المَكَان!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "a5a1d521ff9fb25d0de71608bb1747cc058db7227007abc817149723c4d8d9ac"
+    },
+    "348d6a6dfeef": {
+      "text": "عَلَيَّ! الحِسَاب عِنْدِي",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "08b0c8cab4065a4acdeee399201ed169b7f678c54b6a5da5c460e0e48690dd34"
+    },
+    "09d8e3056d51": {
+      "text": "حَابَّة نِشْرَب شِي سَوَا؟ الحِسَاب عَلَيَّ!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "6c0a999d6af0ca8855abd1c92280d2ea004eeef9967958d7ec3b5641b926cf9c"
+    },
+    "1b2905d3c8a9": {
+      "text": "أَيْنَ مَحَطَّة الحَافِلَات؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e8d11c46a220e7efbf5902dd8b8299120a6e982bee8d33371b19c0eeeea14bdf"
+    },
+    "c3579bde549a": {
+      "text": "المِخَدَّة وَالسُّكَّر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "4da999444e76b0b2f9b19cc77876277df783e0fe4e8044ea7fd8556eb6c63c24"
+    },
+    "c10c432fef0e": {
+      "text": "مَكْتَب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "97303bfa56825962547964c5d8497cc3c274538eb76351238fa9ec9775bc1693"
+    },
+    "7c894aa6c636": {
+      "text": "كِتَاب / مَكْتَب / كَاتِب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "b74408972b91dfca200d49a6c190d3ff1fee6123f9107ac2eb7cb41b5bbc6b5a"
+    },
+    "e89bd549a7b9": {
+      "text": "شَرِبَ / أَشْرَب / مَشْرُوب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "ccac945995c0f304f5156719af458733aa24523d0e4d12599c61f709f1099c37"
+    },
+    "6b22cae9b5c7": {
+      "text": "حِسَاب • عَمَل",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "dda499688b64ee6b271e948a22fb4dfbc8cad0049178ca3fe0a835b50dd879fc"
+    },
+    "338af5d9771e": {
+      "text": "عَلَيْك نُور",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "a34a7638a0948086f90c97e03d7766ea672c36339ad143ca0c2d509189d0df4d"
+    },
+    "cb3d35d40159": {
+      "text": "إِزَّيِّك / إِزَّيَّك",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "c3dce3062ce068657ea4173944d01f1cf2156923ad98bf036bb3627a6ef1243c"
+    },
+    "f981eeffcf4c": {
+      "text": "جَمِيل • قَهْوَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "c426cd605f56488e8f6c5c6bb0eafa9ee9dd60588d265b04f07ec89f35228404"
+    },
+    "8c2e435e2ad7": {
+      "text": "عَايْزَة / بَدِّي / أَبْغِي",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "38dd708929a8104f69320d7b69a5edd60da593f372c86bdcc19720db192c6985"
+    },
+    "f418a40ef071": {
+      "text": "أَنَا عَايِز قَهْوَة، إِزَّيِّك يَا لَيْلَى؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "8fc51932c9bf2cdc670926f6eae929418293362faad9381b6df0e267f270c54f"
+    },
+    "648e5bcf506a": {
+      "text": "جَمِيل قَوِي!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "1220e910f702323c68a68aee20d522ff5f7208da52d5d76cbaccd7c5008133d6"
+    },
+    "495730542fcc": {
+      "text": "تِحِبِّي نِشْرَب حَاجَة سَوَا؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "10bed167e093a157582e42242745e1863f886dbbe635622a02b87d8d796da767"
+    },
+    "a4779f11c103": {
+      "text": "كَرْكَدِيه • تُحْفَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "5fb5cf496e25462a1b95c69e38a39bf84c0d9b106225296fa26eb9652c699d63"
+    },
+    "fa4501196cb4": {
+      "text": "أُرِيدُ • مَاذَا • الْآنَ • هُنَا",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "15842199c793b14bea9f5ad7ec6311c5a72a6634d2a67c898ac090a06225fc6a"
+    },
+    "aed36e02ca79": {
+      "text": "مَبْسُوط إِنِّي شُفْتِك الْيُوم",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "03e32a9132bdc4a5fa18e5716cfed2191cf6cbafbaf4edaa8a097a26689889fc"
+    },
+    "2ebd246f5788": {
+      "text": "عَلَيَّا أَنَا!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "86a6415e5a8f20ae4c3de5fbde0faa97a3bfd7c2b8b61b5733d7fdb833ffca86"
+    },
+    "f1424e9e80b7": {
+      "text": "نُور • يَاسْمِين • لَيْلَى",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "0b89d0c899a271d266ae5f33fbd83eeecab6497db11d8f7764507207b63ec98c"
+    },
+    "2a3f3b978e8d": {
+      "text": "نَشْرَةُ الْأَخْبَارِ • الْآنَ هُنَا فِي الْقَاهِرَةِ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "0daf62c205856f9b9e449ba1336fe7fe731b003932c9418d2f7294bf507c4850"
+    },
+    "33a3fa8a66ad": {
+      "text": "أُرِيدُ أنْ أُرِيَكُمُ الْمَتْحَفَ وَالسُّوقَ الْآنَ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e4dacc92cbe1caa7ac7e7f6371319d30e6e61053f94a102a9b063940ef2e06cb"
+    },
+    "8dd938053336": {
+      "text": "مِنَ الصِّفْرِ إِلَى الْوَاحِدِ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "6edc33fb2acbf86fb4562558bbcd4f1e6b0499292b21527adcae381371790038"
+    },
+    "83d90b7232d7": {
+      "text": "نَحْنُ نَتَكَلَّمُ الْعَرَبِيَّةَ!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "bf861bac9e2188e92348278378dca80a0040227d86ad876d6f1c70a482c09aa3"
+    },
+    "154f18002091": {
+      "text": "جَذْر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "5bb8a1a0ff8e174ea854677a3a19a2c1f3673a2d276b1ea8baec5a731d719e20"
+    },
+    "5d2a17a67975": {
+      "text": "حِسَاب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "d1a70204672e3a0b941cb1bd790b99aae3cba15201b64772246c9a037a75b6fb"
+    },
+    "48dcf392ad20": {
+      "text": "عَمَل / مَعْمَل",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "f9751d10c67c5cca5da5418472fc25a840bb76a3ff59287d473933498a8f9337"
+    },
+    "77eb779130f6": {
+      "text": "جَذْر: ش-ر-ب • مَشْرُوب (mashrūb)",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "b9f2dba3aac869d7816f240f846051da0a37160a4c94ff7ebf16063920f13815"
+    },
+    "cebeadcbe608": {
+      "text": "جَذْر: ك-ت-ب • مَكْتَب (maktab)",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "44f4e02dbbffdc4a9a91ed92416a02dd9bb2bf2afb36bf859f0a54ceea7decb0"
+    },
+    "76b23f383951": {
+      "text": "جَذْر: ح-س-ب • حِسَاب (ḥisāb)",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "27827c2808c0f938d8b31b0a4cd6ef97070845260c78260efc8cb36a192dc3ea"
+    },
+    "347eb6448dff": {
+      "text": "جَمِيل",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "1dbee2cd250e4f44c0acb15b93766d031e7c2f8d4c41105a52d886062d2b4711"
+    },
+    "a85418dc6f4b": {
+      "text": "قَهْوَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "790577116d1ccc8f40c8cdbfcc41f52006aa9bcfbb7d2081d26dbbe0860500b4"
+    },
+    "567f09100ad5": {
+      "text": "إِزَّيِّك / كِيفِك / شْلُونِج",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "5cbc5eea5434028a116458630902e18402d24e193dcce501b8178c1120ab0498"
+    },
+    "d1aff969b561": {
+      "text": "إِيه؟ / شُو؟ / مَاذَا؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "8dec22211ea60323c44106130a32f828e4f23ea1cd8cdf9a664b268e1f0c6ea4"
+    },
+    "40dba1865cd8": {
+      "text": "جَمِيل (gamīl) • إِزَّيِّك / عَايْزَة / إِيه؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "538dc26dcf45ccc3de488a1a7a2a40dda8d81a6641aaf01e56babf9a5ccbdc1a"
+    },
+    "19365e9f68b3": {
+      "text": "جَمِيل (jamīl) • كِيفِك / بَدِّي / شُو؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "f820ffe6915921375651b781c0976811411bcfce0c1641501a1dd7630df9d9f9"
+    },
+    "38b2af0ee018": {
+      "text": "جَمِيل (jamīl) • شْلُونِك / أَبْغِي / شُو؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "30147418b9c1cbdedb227e2aed6ef13b33f7a5e216e21621e809e1d3b8306cdc"
+    },
+    "16c7108a2218": {
+      "text": "كَرْكَدِيه",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "1c0dd073a196778660049bcd43fdf3d926a4192a29a64bd1ecae4fe49780ad40"
+    },
+    "c48641968c81": {
+      "text": "أُرِيدُ ↔ بَدِّي / عَايِز / أَبْغِي",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "fa362fffa3580993646d9efee09480eac2efd055a498a25a3898e4839938ef76"
+    },
+    "0c77f795ea1d": {
+      "text": "مَاذَا ↔ شُو / إِيه • الْآنَ ↔ هَلَّق / دِلْوَقْتِي / الْحِين • هُنَا ↔ هُون / هِنَا",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "d8b1b72a0700eeab99218d920f301bec0d1ea3ec994d9bd17a52153591abe276"
+    },
+    "10e745de51f7": {
+      "text": "تِحِبِّي نِشْرَب حَاجَة سَوَا؟ • أُرِيدُ↔عَايِز/بَدِّي/أَبْغِي • الْآنَ↔دِلْوَقْتِي/هَلَّق/الْحِين",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "a1193171b1d58c0ead349515ba55ba7d300a19b361e0ff47b6ff855d28934c0c"
+    },
+    "2951d0fa4136": {
+      "text": "الْحِسَاب مِنْ فَضْلَك • أُرِيدُ↔كِتَاب • الْآنَ↔مَطَار",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "84aee82a42a54490f93e19c09d1c34a62f621955cfa8b79f72ca97999889aa7d"
+    },
+    "01208997bedc": {
+      "text": "عَلَى جَنَب هُون! • مَاذَا↔سُوق • هُنَا↔قَهْوَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "a2ae615a19a3298d212e28892d1164b8deb375874db46899682b45afa63069dc"
+    },
+    "68a574b42ebb": {
+      "text": "نَشْرَةُ الْأَخْبَارِ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "8fce7ca0995ea604ee82e1c05fd480b615404e3fd605abaa9dcda9244ffc352f"
+    },
+    "628e9077fb54": {
+      "text": "مُشَاهِدِينَا أَهْلًا بِكُمْ الْآنَ هُنَا فِي الْقَاهِرَةِ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "c0faffaf34e91850d15763de847e2c66890e399a4ac8b8b1460ad8dbe656b9a2"
+    },
+    "0ca2bcb4dd4f": {
+      "text": "مِنَ الصِّفْرِ إِلَى الْوَاحِدِ، نَحْنُ نَتَكَلَّمُ الْعَرَبِيَّةَ!",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "7ef0ed8a6033667de7d11c0393a3224c37fd799ae1d73c6ca06dd863006b2f93"
+    },
+    "592b52d76ceb": {
+      "text": "أَيْنَ بَوَّابَةُ الْمَطَارِ يَا أُسْتَاذ؟",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "ba84b501e01e532a56fe89fecf94216aff28ea8a74d80081db00f465efaf0161"
+    },
+    "919abf646cf9": {
+      "text": "الْحِسَابُ مِنْ فَضْلِكَ، لَا أَتَكَلَّمُ الْعَرَبِيَّةَ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "8546bb674d8397ba6579f9d599b5cb90aa8318a110c25689b101772046872824"
+    },
+    "6985712ad9d5": {
+      "text": "أَلِف",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "ae7e7bee663ec9bc3f7ba43801a76e513ad2cefa8dace13c65e623d20819f753"
+    },
+    "91235d606c3d": {
+      "text": "وَاو",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "d29d388979396b16b645ca628e1cc43a19f975681ea66549307cede479424e3e"
+    },
+    "29fdc8ea496d": {
+      "text": "يَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "221abd72d0594fb542dc6b78ef1a790fd6496426d97543c23c33838524ab1250"
+    },
+    "2fa015013f81": {
+      "text": "بَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e7511ea4f0a1bb9db5197e5a057cf3d27f5b7bc5b5430d2f2ce767e506500411"
+    },
+    "b42066b9157e": {
+      "text": "تَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "9df7913fa134f70340075be903b36f6853b7f984e1329610eb0068e7a2fe87f9"
+    },
+    "ac7617cd9d40": {
+      "text": "ثَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "a0a2d8b99f31dc858fd665972925d98e19a563f732f1c4a032fb954edaa5b746"
+    },
+    "0b1979e08f75": {
+      "text": "دَال",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "da0f494324ad24a6641611e5f54b770b50a2896d15d7d01cf371c0d5fb814da2"
+    },
+    "0048de2375ab": {
+      "text": "ذَال",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "7f0be43847d512512da12f8d98b90a0d3cb8a455f9e400f14bd778a5a1501786"
+    },
+    "767b39aebbe9": {
+      "text": "رَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e17817724fc451fdebd7c6c9c76e9d87562eb5074f9ed27aa3141554c861e10e"
+    },
+    "a20630dfc233": {
+      "text": "زَاي",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e8ccde6041cb871bbef7b1bdbd11443b36175cba0974f524145319c1643b4c2a"
+    },
+    "830f6204b4ac": {
+      "text": "نُون",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "23be4ff84752ed7ba530549156f569ea1b1644532914dae7c524deb35a32fad4"
+    },
+    "6b093bfe4b80": {
+      "text": "مِيم",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "26df560307c0e12ff4431e1b95c5da89aaeb22f96d7cfa321cf77af57f7c2013"
+    },
+    "f281e965d121": {
+      "text": "لَام",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "070c92b6dded63ce25bd6661c39803e20b3af5a152ddd7bd4d59d3722825c78e"
+    },
+    "edb302b7ad84": {
+      "text": "كَاف",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "636481b3539a0d3f4c238d06c9a5b06c815a71f8935545810f2b8a3a71373297"
+    },
+    "e7ccfa907a30": {
+      "text": "هَاء (وَالتَّاء الْمَرْبُوطَة ة)",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "d0119bbb5c95321ecfa06f899bd2e40e85615e0105326636a4dc8a1a5e5a2937"
+    },
+    "15f8660c1c25": {
+      "text": "جِيم",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "663aedadd13cfe26d685715f14a68ce780d2f9595b5f7d02b61cbe3f6253586d"
+    },
+    "80fdcbc12594": {
+      "text": "حَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "46ebb8f0a4b3f4d9d4f84e4a95d42d675cf90b6ccf6051a2121f2b1a71e0db21"
+    },
+    "04c5b2fa01da": {
+      "text": "خَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "2269c203289c995d63e48f82d37d152a34912d6dd7d74cd80dd1231d666f92e1"
+    },
+    "a870ddb82a1b": {
+      "text": "سِين",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "06e8a2f86379fe26c7ce4d2e12e6658e08117567f950dde15e90a7d14c44a997"
+    },
+    "f072e3e72ad8": {
+      "text": "شِين",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "0106cc6f77f42b077486337913d6b2899bcca3cbeecdc6d8f3058dc35f3280bd"
+    },
+    "33f4517b7b4d": {
+      "text": "فَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "68f0095f818b6e47adee3518646de91f19dec510f5fea35adce017c49006c0e5"
+    },
+    "0efce1aff486": {
+      "text": "قَاف",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "90e57e416e2c5745b01187d639afdefa4abce31cc138b59a978932447de2d9d7"
+    },
+    "be3893eedcee": {
+      "text": "عَيْن",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "473e731e041a4476bcbb220ba00a109001756b1ac130ae1c3d2557acce94bb99"
+    },
+    "080f550b2a58": {
+      "text": "غَيْن",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "a1c90187424f633374750e664b768c6520116ededc56a124b674458fa908dfa5"
+    },
+    "ead1779e4d23": {
+      "text": "صَاد",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "2943a680e56544b22cfd755f0349ac106ea2cb87284a76c1af48c1645d3a09c6"
+    },
+    "3b3cd11eabc7": {
+      "text": "ضَاد",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "9f733469793e0be3d8709d291950b2d2a8b837d6cca42ca876fe98457d3a1f08"
+    },
+    "3255f2230c97": {
+      "text": "طَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "f42bef58c9f1a61e31fc01ef6194057ef814793f06491e3efce7b9ae4dccdd82"
+    },
+    "096d40a7ec64": {
+      "text": "ظَاء",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "0e30c86e88d85b497c2ac62f947ad25c42ebf935e87369b9fa11cca47f563033"
+    },
+    "6abf65dab76c": {
+      "text": "بَاب / أَنَا",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "9c4902435f05974e1ff71a18c3b96a94eb1f88d293ebf3b97cf3be0aaebdd257"
+    },
+    "b09d490d9a5c": {
+      "text": "نُور / تَوْت",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "1ad754696efbf44b627a66a0fa222cc3fadd7d87dc611da100229800ed5f7294"
+    },
+    "d1eedaa2f45b": {
+      "text": "بَيْت / يَاسْمِين",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "b91b88b9687801998aea78373c5b0ea5bf5df4082ac756d36b0d43d0b2a659df"
+    },
+    "dc31e2b1315f": {
+      "text": "بَاب / بَيْت",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "a47168678370da3dfc1dbaf2758af8f99a3bf87aec3f41441f4c4b64fde1dc41"
+    },
+    "9e67a6477ab9": {
+      "text": "تُوت / حَتَّى",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "c5524a8f92764114abbf7a604b26f35c2fd2ab88b55d5557656189c9608ed531"
+    },
+    "7a96c4dd98ea": {
+      "text": "ثَلَاثَة / قِيثَارَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "72797627f619310fd222cbcd0772c5978b7719910daa335ec2b59ead8b3616fb"
+    },
+    "7537335cd45e": {
+      "text": "دَار / دُبَيّ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "90edf8ec280440e97196f8ef4c21365ec87c98b5d232cbb18e6ac60c81da0824"
+    },
+    "bc18c085314f": {
+      "text": "ذَهَب / مَاذَا",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "95475c356b1bc8dd1dde3259578fa10ee29560417ce0b801b8366d0ce39140c1"
+    },
+    "fe817c0b4088": {
+      "text": "نُور / سُكَّر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "22d5077d3dd7abd6a95885160ac1a15fe6d315e2d03a747deeb49de88b9c32fb"
+    },
+    "ee45b25e97e1": {
+      "text": "زَيْت / الزَّيْت",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "cb687ed977c498e6a92bf1c47791f8b4b356f4b2f38b1ba852e0aaaf79cca8a7"
+    },
+    "84f2c91300b9": {
+      "text": "نُور / أَنَا",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "705b4cafbe55be4aa791242aef1d134c8e41118f34633dda1c6c1ff97136ff74"
+    },
+    "0c78dcc96e50": {
+      "text": "مَكْتَب / الْمِخَدَّة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "3b8876e8d518d8fc6125357f6ffeff72ca97b6bad33747d5427ccb9d11b5ce76"
+    },
+    "ee8a9a294431": {
+      "text": "لَيْلَى / لَيْمُون",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "40758a70d7ea70ed239c423d22e67a20da7a32564e2fff899b47f6315498e53d"
+    },
+    "9dc7b823c2e9": {
+      "text": "كِتَاب / كَيْفَ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "55cd8012524479c9fde6a460813c3bacde4d1a4884179519a159afd1fe3d6530"
+    },
+    "cb8752106e7a": {
+      "text": "هُنَا / قَهْوَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "294deafa9bc38ce38a24e17b2bfc72be4d38c60d106f9719e5d211b6e1ce2533"
+    },
+    "ce5996089b00": {
+      "text": "جَمِيل / جَذْر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e1dd5ef14807da6186299087674727a213948882568b2ec9ae1a022acdc43fce"
+    },
+    "bdcd3e43f498": {
+      "text": "حَتَّى / حِسَاب / مَرْحَبًا",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "2d7121480d6475b0ee0eb2bcc71430d16d43ac60d90d83dc5f4855e4cf4acd93"
+    },
+    "cf6c79520d30": {
+      "text": "خُبْز / الْأَخْبَار",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "e0654c46016c363c2824a4e3c244bcbe2434e1c037ff3b13d9ed5d05ecbc94c9"
+    },
+    "eb7eb3d7c8d6": {
+      "text": "سُكَّر / سُوق",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "77b329b8461f69d076c2d1737ac04903cefa91e4ab8394468f73007d122f0f31"
+    },
+    "359f132122b3": {
+      "text": "شُكْرًا / مَشْرُوب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "380c7156e47337f07e51a89080364b068f8ed244464b06ae8eec2548078c2a62"
+    },
+    "c9c928fa50d8": {
+      "text": "فِي / فَلُوكَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "f4f3f20e90bc7a8b8a733d6b9b343428db7e702bf76c1d622662a2ad06dbde50"
+    },
+    "7bd65e321a55": {
+      "text": "قَهْوَة / الْقَاضِي",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "6253b2138f448d7516c465b56de81bd8ed4affb876b59e1dbff78d1c4ddd383c"
+    },
+    "c7a287874a24": {
+      "text": "عَرَبِيَّة / عَمَل / عَلَيَّا",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "85456aa7c34a19bec2304d7f03149d5fb87365db7fbb73116909fbe6cebed9da"
+    },
+    "d850522038b4": {
+      "text": "أَبْغِي / غُرُوب",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "4fd4edae760245b3d68a3f3013aa738ea0d92432d3bf9f1071c60442c025d74c"
+    },
+    "70fc1d98bb86": {
+      "text": "صِفْر / قَمِيص",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "196d4054f79bcf580b49f24b5052aab2b0068d295c4c38ef5ed726c35a3c0aaf"
+    },
+    "a96d0025f6e9": {
+      "text": "مِنْ فَضْلِك / الْقَاضِي",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "08cbda65bbfed8ee62b40ccab9c5ef91c5e83051368a2a0ec195dfa0bbe01669"
+    },
+    "d219ae3c21b1": {
+      "text": "طَاسَة / مَطَار / مَبْسُوط",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "3990eb422b5182772ec8dcd8608b2b5483ecd8f71a10e2498227edd170143d37"
+    },
+    "ce102779a72e": {
+      "text": "حَظّ سَعِيد / بِالظَّبْط",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "ba9f0861df042c08b2731a000581b26dbc69b2050c97db0d51c951a1e1e21f3b"
+    },
+    "9d7f90c0961a": {
+      "text": "السُّكَّر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "c36bec3601e2424be2f69bde657b4398177d7ea0f5c8e4489901da5dc4fd60db"
+    },
+    "2f7fa604130b": {
+      "text": "الزَّيْت",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "c6ad819c4785b3e25fe237b39298c9b315e6b7a26f4c3ff65f56049f5f57d212"
+    },
+    "53497beea36b": {
+      "text": "الْمِخَدَّة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "8c8e9a8d5c51a92b384466654eb444d3a93db33d98458d83bba3cb423fb32938"
+    },
+    "25e1c639826b": {
+      "text": "الْقَاضِي",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "3329a887c95f5b302b87ea0cdaf5f90818a641265b7dade69f8fc4864e4cd8eb"
+    },
+    "446380efb0a6": {
+      "text": "الْبَرِّيّ",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "325f97eff45fb9fad15f25e026b2db8ef20ca79d3ab36ec549c290c2aadc7a36"
+    },
+    "81c077ede802": {
+      "text": "قَمِيص",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "a855befe589389d7457ecbbcfa9f38eb0635a8c62fc7641cbfc50a06b3fd0a5a"
+    },
+    "b88179906e3d": {
+      "text": "لَيْمُون",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "0a4582022fe62429f1dad7152feaf1416f12fe8dc0d98c5ac33e99fa29885560"
+    },
+    "8fc5a01d4963": {
+      "text": "صِفْر",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "425e86c717d171c9af2c2a720c5c71cc3aed127919dba023d9d63b0dcce8824a"
+    },
+    "ad3f647c25c6": {
+      "text": "قِيثَارَة",
+      "provider": "preserved-google-arabic",
+      "audioSha256": "2fa991d41becc513b5f7ae293b64e28e46539bfe59153766bb86b8e24454c129"
+    }
+  }
+}

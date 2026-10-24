@@ -3,6 +3,7 @@
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
+bash scripts/build-worker.sh
 bash scripts/voice-pipeline.sh
 
 flutter_version="$(tr -d '[:space:]' < .flutter-version)"

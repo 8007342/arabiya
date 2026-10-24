@@ -1,14 +1,7 @@
 // @trace spec:arabiya, spec:character-canon, spec:curriculum-and-comics
 import 'dart:ui';
 
-enum CharacterId {
-  tlatoani,
-  covi,
-  nur,
-  yasmin,
-  layla,
-  macron,
-}
+enum CharacterId { tlatoani, covi, nur, yasmin, layla, macron }
 
 enum EmotionState {
   calm,
@@ -102,7 +95,8 @@ class ComicPanelData {
   final String spokenAudioText;
   final String spokenLocale;
   final ArabicWordToken? arabicSpotlight;
-  final String macronEmojis; // Emojis ONLY, never text (@trace spec:character-canon)
+  final String
+  macronEmojis; // Emojis ONLY, never text (@trace spec:character-canon)
   final String macronProp;
   final String? culturalNote;
 
@@ -207,6 +201,7 @@ class ComicChapterData {
 class PlayerProgressState {
   final String currentChapterId;
   final int currentPanelIndex;
+  final int doorEpisodeBeat;
   final int highestChapterIndex;
   final int xp;
   final int streakDays;
@@ -214,22 +209,26 @@ class PlayerProgressState {
   final List<String> unlockedLetters;
   final List<String> masteredWords;
   final Map<String, int> affinities;
+  final List<Map<String, dynamic>> writingEvidence;
 
   const PlayerProgressState({
     this.currentChapterId = 'ch1_dxb_touchdown',
     this.currentPanelIndex = 0,
+    this.doorEpisodeBeat = 0,
     this.highestChapterIndex = 0,
     this.xp = 0,
     this.streakDays = 1,
     this.completedChapters = const [],
     this.unlockedLetters = const ['ا', 'ب', 'ت'],
-    this.masteredWords = const ['بَاب'],
+    this.masteredWords = const [],
     this.affinities = const {'nur': 0, 'yasmin': 0, 'layla': 0},
+    this.writingEvidence = const [],
   });
 
   PlayerProgressState copyWith({
     String? currentChapterId,
     int? currentPanelIndex,
+    int? doorEpisodeBeat,
     int? highestChapterIndex,
     int? xp,
     int? streakDays,
@@ -237,10 +236,12 @@ class PlayerProgressState {
     List<String>? unlockedLetters,
     List<String>? masteredWords,
     Map<String, int>? affinities,
+    List<Map<String, dynamic>>? writingEvidence,
   }) {
     return PlayerProgressState(
       currentChapterId: currentChapterId ?? this.currentChapterId,
       currentPanelIndex: currentPanelIndex ?? this.currentPanelIndex,
+      doorEpisodeBeat: doorEpisodeBeat ?? this.doorEpisodeBeat,
       highestChapterIndex: highestChapterIndex ?? this.highestChapterIndex,
       xp: xp ?? this.xp,
       streakDays: streakDays ?? this.streakDays,
@@ -248,20 +249,23 @@ class PlayerProgressState {
       unlockedLetters: unlockedLetters ?? this.unlockedLetters,
       masteredWords: masteredWords ?? this.masteredWords,
       affinities: affinities ?? this.affinities,
+      writingEvidence: writingEvidence ?? this.writingEvidence,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'currentChapterId': currentChapterId,
-        'currentPanelIndex': currentPanelIndex,
-        'highestChapterIndex': highestChapterIndex,
-        'xp': xp,
-        'streakDays': streakDays,
-        'completedChapters': completedChapters,
-        'unlockedLetters': unlockedLetters,
-        'masteredWords': masteredWords,
-        'affinities': affinities,
-      };
+    'currentChapterId': currentChapterId,
+    'currentPanelIndex': currentPanelIndex,
+    'doorEpisodeBeat': doorEpisodeBeat,
+    'highestChapterIndex': highestChapterIndex,
+    'xp': xp,
+    'streakDays': streakDays,
+    'completedChapters': completedChapters,
+    'unlockedLetters': unlockedLetters,
+    'masteredWords': masteredWords,
+    'affinities': affinities,
+    'writingEvidence': writingEvidence,
+  };
 
   factory PlayerProgressState.fromJson(Map<String, dynamic> json) {
     final rawAff = (json['affinities'] as Map?) ?? const {};
@@ -269,20 +273,34 @@ class PlayerProgressState {
       currentChapterId:
           (json['currentChapterId'] as String?) ?? 'ch1_dxb_touchdown',
       currentPanelIndex: (json['currentPanelIndex'] as num?)?.toInt() ?? 0,
+      doorEpisodeBeat: ((json['doorEpisodeBeat'] as num?)?.toInt() ?? 0).clamp(
+        0,
+        7,
+      ),
       highestChapterIndex: (json['highestChapterIndex'] as num?)?.toInt() ?? 0,
       xp: (json['xp'] as num?)?.toInt() ?? 0,
       streakDays: (json['streakDays'] as num?)?.toInt() ?? 1,
-      completedChapters: (json['completedChapters'] as List?)
+      completedChapters:
+          (json['completedChapters'] as List?)
               ?.map((e) => e.toString())
               .toList() ??
           const [],
-      unlockedLetters: (json['unlockedLetters'] as List?)
+      unlockedLetters:
+          (json['unlockedLetters'] as List?)
               ?.map((e) => e.toString())
               .toList() ??
           const ['ا', 'ب', 'ت'],
       masteredWords:
           (json['masteredWords'] as List?)?.map((e) => e.toString()).toList() ??
-              const ['بَاب'],
+          const [],
+      writingEvidence:
+          (json['writingEvidence'] as List?)
+              ?.whereType<Map>()
+              .where((event) => event['id'] is String)
+              .take(96)
+              .map((event) => Map<String, dynamic>.from(event))
+              .toList() ??
+          const [],
       affinities: {
         'nur': (rawAff['nur'] as num?)?.toInt() ?? 0,
         'yasmin': (rawAff['yasmin'] as num?)?.toInt() ?? 0,
