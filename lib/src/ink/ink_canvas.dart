@@ -15,12 +15,14 @@ class InkController extends ChangeNotifier {
   double nibAngle = math.pi / 4;
   double width = 9;
   int revision = 0;
+  bool isDrawing = false;
   void changed() {
     revision++;
     notifyListeners();
   }
 
   void clear({InkTarget? target, InkAssistance? assistance}) {
+    isDrawing = false;
     attempt = InkAttempt(
       target: target ?? attempt.target,
       assistance: assistance ?? attempt.assistance,
@@ -119,6 +121,7 @@ class _InkCanvasState extends State<InkCanvas> {
       samples: [_sample(event, size)],
     );
     widget.controller.attempt.strokes.add(_stroke!);
+    widget.controller.isDrawing = true;
     widget.controller.changed();
   }
 
@@ -128,6 +131,7 @@ class _InkCanvasState extends State<InkCanvas> {
     if (!widget.controller.attempt.strokes.contains(_stroke)) {
       _pointer = null;
       _stroke = null;
+      widget.controller.isDrawing = false;
       return;
     }
     _stroke!.samples.add(_sample(event, size));
@@ -141,6 +145,7 @@ class _InkCanvasState extends State<InkCanvas> {
     if (!cancelled) _stroke!.samples.add(_sample(event, size));
     _pointer = null;
     _stroke = null;
+    widget.controller.isDrawing = false;
     widget.controller.changed();
   }
 
@@ -160,9 +165,22 @@ class _InkCanvasState extends State<InkCanvas> {
               onPointerMove: (e) => _move(e, size),
               onPointerUp: (e) => _up(e, size),
               onPointerCancel: (e) => _up(e, size, cancelled: true),
-              child: GestureDetector(
-                onPanStart: (_) {},
-                onPanUpdate: (_) {},
+              onPointerSignal: (event) {
+                if (_pointer != null && event is PointerScrollEvent) {
+                  GestureBinding.instance.pointerSignalResolver.register(
+                    event,
+                    (_) {},
+                  );
+                }
+              },
+              child: RawGestureDetector(
+                behavior: HitTestBehavior.opaque,
+                gestures: {
+                  EagerGestureRecognizer:
+                      GestureRecognizerFactoryWithHandlers<
+                        EagerGestureRecognizer
+                      >(() => EagerGestureRecognizer(), (_) {}),
+                },
                 child: AnimatedBuilder(
                   animation: widget.controller,
                   builder: (context, _) => CustomPaint(

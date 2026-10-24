@@ -10,7 +10,8 @@ with a Cloudflare Worker and SQLite Durable Object for account progress.
   translations, scene replay, and saved episode position.
 - **Play with a Stylus:** guided/copy/recall practice for ب ت ث ا, a free ink studio,
   and an unlockable broad-nib ribbon challenge. Pen, touch and mouse are supported;
-  pressure and orientation affect ink when supplied by the device/browser.
+  pressure and orientation affect ink when supplied by the device/browser. All
+  drawing opens a fixed desk with docked controls and visible check results.
 - **Honest writing checks:** explicit submission, separate strokes/dots, body
   coverage and extra-ink rejection. These are experimental constrained-template
   checks, not general Arabic recognition or validated fluency/calligraphy grades.

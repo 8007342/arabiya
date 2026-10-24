@@ -195,3 +195,26 @@ per-account evidence, saved scene position, enlarged notebook/archive and actual
 neural English/Spanish recordings. Formation grading covers four constrained
 letters and remains experimental; broader connected writing, native educator
 review, physical pen verification and real cloud SSO are still outstanding.
+
+## Follow-up: writing gestures and check feedback
+
+The user reported finger/stylus strokes scrolling the page and invisible check
+feedback. These were application interaction defects, not failures of Forge routing.
+The prior pan recognizer competed with parent scrolling; results were rendered
+below the fold. Flutter browser elements also reported native `touch-action:auto`.
+
+Fix: all writing activities now open a shared fixed desk, own their gesture
+sequence immediately, and suppress browser-native pan/overscroll only for the
+lifetime of that desk. Controls stay docked; check feedback opens an immediate,
+large result panel. Instructions/palettes scroll separately. Browser gesture
+styles are restored when leaving the desk; normal reading still scrolls.
+
+What worked: the Forge's iPhone 17 Pro Max emulation plus CDP touch input reproduced
+real browser finger events. A complete ba body and separate dot produced accepted
+`touch` evidence with coverage 1, page scrollY stayed 0, and the visible result was
+confirmed by screenshot. On leaving the desk, computed touch-action returned to
+`auto` and overflow to `visible`. Native widget regressions cover both touch and
+stylus ownership inside a scrollable parent, fixed controls/result geometry at
+200% phone text, and free-ink/ribbon desk navigation. This is emulation, not a claim
+of testing the user's physical Lenovo stylus or iPhone. No cloud build/deployment
+was requested for this follow-up; changes are served through the local preview.

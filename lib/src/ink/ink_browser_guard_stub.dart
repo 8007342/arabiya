@@ -1,0 +1,3 @@
+class InkBrowserGuard {
+  void dispose() {}
+}

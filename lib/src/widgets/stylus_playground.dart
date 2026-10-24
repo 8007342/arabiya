@@ -1,13 +1,9 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../ink/ink_canvas.dart';
 import '../ink/ink_evidence_store.dart';
 import '../ink/ink_model.dart';
+import '../ink/ink_studio_workspace.dart';
 import '../ink/ink_practice_card.dart';
 
 class StylusPlayground extends StatefulWidget {
@@ -31,9 +27,6 @@ class _StylusPlaygroundState extends State<StylusPlayground> {
   bool _unlocked = false;
   int _attempts = 0;
   int _recalls = 0;
-  Timer? _replay;
-  int? _replayMicros;
-  String? _message;
   @override
   void initState() {
     super.initState();
@@ -65,65 +58,8 @@ class _StylusPlaygroundState extends State<StylusPlayground> {
 
   @override
   void dispose() {
-    _replay?.cancel();
     _ink.dispose();
     super.dispose();
-  }
-
-  void _stopReplay() {
-    _replay?.cancel();
-    setState(() {
-      _replayMicros = null;
-    });
-  }
-
-  void _startReplay() {
-    final samples = _ink.attempt.strokes.expand((s) => s.samples).toList();
-    if (samples.isEmpty) return;
-    final end = samples.last.elapsedMicros;
-    _replay?.cancel();
-    setState(() {
-      _replayMicros = 0;
-    });
-    _replay = Timer.periodic(const Duration(milliseconds: 32), (timer) {
-      if (!mounted) {
-        timer.cancel();
-        return;
-      }
-      if ((_replayMicros ?? 0) >= end) {
-        _stopReplay();
-        return;
-      }
-      setState(() {
-        _replayMicros = (_replayMicros ?? 0) + 64000;
-      });
-    });
-  }
-
-  Future<void> _export() async {
-    try {
-      await Clipboard.setData(
-        ClipboardData(
-          text: const JsonEncoder.withIndent('  ').convert({
-            ..._ink.attempt.toJson(),
-            'activity': 'creative-ink',
-            'target': null,
-            'assistance': null,
-          }),
-        ),
-      );
-      if (mounted) {
-        setState(() {
-          _message = 'Raw strokes copied as JSON. Pressure, times, pen lifts and available tilt are included.';
-        });
-      }
-    } catch (_) {
-      if (mounted) {
-        setState(() {
-          _message = 'Clipboard is unavailable in this browser.';
-        });
-      }
-    }
   }
 
   @override
@@ -318,7 +254,6 @@ class _StylusPlaygroundState extends State<StylusPlayground> {
         )
       : OutlinedButton.icon(
           onPressed: () {
-            _stopReplay();
             setState(() {
               _tab = index;
               if (index == 2 && _unlocked) _ink.brush = InkBrush.broadNib;
@@ -338,137 +273,25 @@ class _StylusPlaygroundState extends State<StylusPlayground> {
           : 'A whole page of possibilities.',
       style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800),
     ),
-    const SizedBox(height: 10),
+    const SizedBox(height: 12),
     Text(
       _tab == 2
-          ? 'Draw six looping petals around a center. Keep the nib at 45° and watch the line change as you turn. Then try 90°. This is a creative challenge, with no handwriting grade.'
-          : 'Try a loop, a long sweep, or your name. Pen, finger and mouse all work. Your drawing stays here until you clear it or leave.',
+          ? 'Draw six looping petals around a center. Explore the nib angle in Ink tools.'
+          : 'Try a loop, a long sweep, or your name. Your paper stays fixed while you draw.',
       style: const TextStyle(fontSize: 24, height: 1.45),
     ),
-    const SizedBox(height: 18),
-    Wrap(
-      spacing: 10,
-      runSpacing: 10,
-      children: [
-        for (final brush in InkBrush.values.where(
-          (b) => b != InkBrush.broadNib || _tab == 2,
-        ))
-          ChoiceChip(
-            label: Text(switch (brush) {
-              InkBrush.round => 'Round pen',
-              InkBrush.pressure => 'Pressure brush',
-              InkBrush.broadNib => 'Broad nib',
-            }, style: const TextStyle(fontSize: 22)),
-            selected: _ink.brush == brush,
-            onSelected: (_) => setState(() {
-              _ink.brush = brush;
-              _ink.changed();
-            }),
-            padding: const EdgeInsets.all(10),
-          ),
-      ],
-    ),
-    const SizedBox(height: 16),
-    Text(
-      'Pen width · ${_ink.width.round()}',
-      style: const TextStyle(fontSize: 24),
-    ),
-    Slider(
-      value: _ink.width,
-      min: 3,
-      max: 22,
-      divisions: 19,
-      label: '${_ink.width.round()}',
-      onChanged: (v) => setState(() {
-        _ink.width = v;
-        _ink.changed();
-      }),
-    ),
-    if (_ink.brush == InkBrush.broadNib) ...[
-      Text(
-        'Virtual nib angle · ${(_ink.nibAngle * 180 / math.pi).round()}°',
-        style: const TextStyle(fontSize: 24),
-      ),
-      Slider(
-        value: _ink.nibAngle,
-        min: 0,
-        max: math.pi,
-        divisions: 12,
-        label: '${(_ink.nibAngle * 180 / math.pi).round()}°',
-        onChanged: (v) => setState(() {
-          _ink.nibAngle = v;
-          _ink.changed();
-        }),
-      ),
-      const Text(
-        'The virtual angle works on every device. Line width follows movement direction; measured pressure adds variation when available.',
-        style: TextStyle(fontSize: 20, height: 1.4),
-      ),
-    ],
-    const SizedBox(height: 16),
-    InkCanvas(
-      controller: _ink,
-      showGuide: false,
-      height: MediaQuery.sizeOf(context).width < 500 ? 360 : 460,
-      replayMicros: _replayMicros,
-    ),
-    const SizedBox(height: 16),
-    Wrap(
-      spacing: 10,
-      runSpacing: 12,
-      children: [
-        OutlinedButton.icon(
-          onPressed: () {
-            _stopReplay();
-            _ink.undo();
-          },
-          icon: const Icon(Icons.undo),
-          label: const Text('Undo'),
-        ),
-        OutlinedButton.icon(
-          onPressed: () {
-            _stopReplay();
-            _ink.clear();
-          },
-          icon: const Icon(Icons.refresh),
-          label: const Text('Clear page'),
-        ),
-        OutlinedButton.icon(
-          onPressed: _replayMicros == null ? _startReplay : _stopReplay,
-          icon: Icon(_replayMicros == null ? Icons.play_arrow : Icons.stop),
-          label: Text(_replayMicros == null ? 'Replay ink' : 'Stop replay'),
-        ),
-        TextButton.icon(
-          onPressed: _export,
-          icon: const Icon(Icons.copy),
-          label: const Text('Copy raw ink'),
-        ),
-      ],
-    ),
-    const SizedBox(height: 18),
-    AnimatedBuilder(
-      animation: _ink,
-      builder: (context, _) {
-        final strokes = _ink.attempt.strokes;
-        final kinds = strokes.map((s) => s.pointerKind).toSet();
-        return Text(
-          '${strokes.length} pen-down strokes · ${kinds.isEmpty ? 'Ready for input' : kinds.join(', ')}\n${_ink.hasVaryingPressure ? 'Varying pen pressure detected.' : 'No varying pressure detected yet. Finger and mouse use a steady width.'}',
-          style: const TextStyle(fontSize: 22, height: 1.5),
-        );
-      },
-    ),
-    if (_message != null)
-      Padding(
-        padding: const EdgeInsets.only(top: 12),
-        child: Semantics(
-          liveRegion: true,
-          child: Text(_message!, style: const TextStyle(fontSize: 22)),
+    const SizedBox(height: 20),
+    FilledButton.icon(
+      key: const ValueKey('open-ink-studio'),
+      onPressed: () => Navigator.of(context).push<void>(
+        MaterialPageRoute(
+          fullscreenDialog: true,
+          builder: (_) =>
+              InkStudioWorkspace(controller: _ink, broadNib: _tab == 2),
         ),
       ),
-    const SizedBox(height: 16),
-    const Text(
-      'Ink is drawn immediately on this device. Raw samples are copied only when you choose Copy raw ink. This studio does not recognize or transcribe handwriting.',
-      style: TextStyle(fontSize: 20, height: 1.5),
+      icon: const Icon(Icons.draw_outlined),
+      label: const Text('Open drawing desk', style: TextStyle(fontSize: 26)),
     ),
   ];
 }

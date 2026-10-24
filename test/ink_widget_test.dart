@@ -207,11 +207,10 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: SingleChildScrollView(
-            child: InkPracticeCard(
-              onAccepted: () => accepted++,
-              onEvidence: evidence.add,
-            ),
+          body: InkPracticeWorkspace(
+            target: InkTarget.ba,
+            onAccepted: () => accepted++,
+            onEvidence: evidence.add,
           ),
         ),
       ),
@@ -238,6 +237,10 @@ void main() {
     expect(accepted, 1);
     expect(evidence.single['accepted'], true);
     expect((await InkEvidenceStore().read()).length, 1);
+    expect(find.byKey(const ValueKey('writing-check-result')), findsOneWidget);
+    expect(find.text('Shape matched!'), findsOneWidget);
+    await tester.tap(find.byTooltip('Look at my writing'));
+    await tester.pumpAndSettle();
     await tester.tap(submit);
     await tester.pumpAndSettle();
     expect(accepted, 1);
@@ -252,9 +255,7 @@ void main() {
       });
       Widget app(List<Map<String, dynamic>> evidence) => MaterialApp(
         home: Scaffold(
-          body: SingleChildScrollView(
-            child: InkPracticeCard(evidence: evidence),
-          ),
+          body: InkPracticeWorkspace(target: InkTarget.ba, evidence: evidence),
         ),
       );
       await tester.pumpWidget(app([]));
@@ -324,4 +325,140 @@ void main() {
       expect(tester.takeException(), isNull);
     }
   });
+  for (final kind in [PointerDeviceKind.touch, PointerDeviceKind.stylus]) {
+    testWidgets('$kind drawing owns the drag instead of scrolling its parent', (
+      tester,
+    ) async {
+      final scroll = ScrollController(initialScrollOffset: 50);
+      final ink = InkController();
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              controller: scroll,
+              child: Column(
+                children: [
+                  const SizedBox(height: 120),
+                  InkCanvas(controller: ink),
+                  const SizedBox(height: 1200),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final before = tester.getRect(find.byType(InkCanvas));
+      final pen = await tester.createGesture(kind: kind);
+      await pen.down(before.topLeft + const Offset(130, 240));
+      for (var step = 1; step <= 6; step++) {
+        await pen.moveBy(const Offset(7, -25));
+        await tester.pump();
+      }
+      await pen.up();
+      await tester.pumpAndSettle();
+      expect(scroll.offset, 50);
+      expect(tester.getRect(find.byType(InkCanvas)), before);
+      expect(ink.attempt.strokes.single.cancelled, false);
+      expect(ink.attempt.strokes.single.samples.length, greaterThan(5));
+      // Other content still scrolls normally; only the writing surface owns ink.
+      await tester.dragFrom(const Offset(15, 35), const Offset(0, -30));
+      await tester.pumpAndSettle();
+      expect(scroll.offset, greaterThan(50));
+      await tester.pumpWidget(const SizedBox());
+      ink.dispose();
+      scroll.dispose();
+    });
+  }
+
+  testWidgets(
+    'fixed phone desk keeps paper and check control in place and shows empty-result feedback',
+    (tester) async {
+      tester.view.physicalSize = const Size(390, 844);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      await tester.pumpWidget(
+        MaterialApp(
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: const TextScaler.linear(2)),
+            child: child!,
+          ),
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: InkPracticeCard(evidence: const []),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(InkCanvas), findsNothing);
+      await tester.ensureVisible(
+        find.byKey(const ValueKey('open-writing-desk')),
+      );
+      await tester.tap(find.byKey(const ValueKey('open-writing-desk')));
+      await tester.pumpAndSettle();
+      final paper = tester.getRect(find.byType(InkCanvas));
+      final check = find.byKey(const ValueKey('check-writing'));
+      expect(paper.height, greaterThan(200));
+      expect(tester.getRect(check).bottom, lessThanOrEqualTo(844));
+      await tester.tap(check);
+      await tester.pumpAndSettle();
+      expect(find.text('Checked · Try again'), findsOneWidget);
+      expect(
+        find.byKey(const ValueKey('writing-check-result')),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Try again'));
+      await tester.pumpAndSettle();
+      expect(tester.getRect(find.byType(InkCanvas)), paper);
+      expect(tester.takeException(), isNull);
+    },
+  );
+  testWidgets(
+    'free ink and ribbon activities also open fixed desks at large phone text',
+    (tester) async {
+      tester.view.physicalSize = const Size(390, 844);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      await tester.pumpWidget(
+        MaterialApp(
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: const TextScaler.linear(2)),
+            child: child!,
+          ),
+          home: StylusPlayground(
+            onClose: () {},
+            evidence: const [
+              {'target': 'ba', 'accepted': true, 'assistance': 'guided'},
+            ],
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      for (final tab in ['02 · Free ink', '03 · Ribbon garden']) {
+        await tester.ensureVisible(find.text(tab));
+        await tester.tap(find.text(tab));
+        await tester.pumpAndSettle();
+        expect(find.byType(InkCanvas), findsNothing);
+        final open = find.byKey(const ValueKey('open-ink-studio'));
+        await tester.ensureVisible(open);
+        await tester.tap(open);
+        await tester.pumpAndSettle();
+        final paper = tester.getRect(find.byType(InkCanvas));
+        expect(paper.height, greaterThan(200));
+        final gesture = await tester.startGesture(paper.center);
+        await gesture.moveBy(const Offset(20, -80));
+        await gesture.up();
+        await tester.pumpAndSettle();
+        expect(tester.getRect(find.byType(InkCanvas)), paper);
+        expect(tester.takeException(), isNull);
+        await tester.tap(find.byTooltip('Close writing desk'));
+        await tester.pumpAndSettle();
+      }
+    },
+  );
 }

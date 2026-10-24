@@ -6,7 +6,10 @@ import 'ink_canvas.dart';
 import 'ink_evidence_store.dart';
 import 'ink_model.dart';
 import 'ink_rubric.dart';
+import 'ink_workspace.dart';
 
+/// Story and activity pages launch the same fixed desk. They never contain a
+/// writable surface inside their own scrolling layout.
 class InkPracticeCard extends StatefulWidget {
   const InkPracticeCard({
     super.key,
@@ -26,10 +29,111 @@ class InkPracticeCard extends StatefulWidget {
 }
 
 class _InkPracticeCardState extends State<InkPracticeCard> {
+  final _recent = <Map<String, dynamic>>[];
+  bool _matched = false;
+
+  Future<void> _open() async {
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (_) => InkPracticeWorkspace(
+          target: widget.target,
+          evidence: widget.evidence == null
+              ? null
+              : [...widget.evidence!, ..._recent],
+          onEvidence: (event) {
+            _recent.add(event);
+            widget.onEvidence?.call(event);
+          },
+          onAccepted: () {
+            if (mounted) setState(() => _matched = true);
+            widget.onAccepted?.call();
+          },
+        ),
+      ),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant InkPracticeCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.target != widget.target ||
+        oldWidget.evidence != widget.evidence) {
+      _recent.clear();
+      _matched = false;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+      color: const Color(0xFFF1E7D5),
+      borderRadius: BorderRadius.circular(28),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'Write ${widget.target.glyph}',
+          style: const TextStyle(
+            fontSize: 38,
+            fontWeight: FontWeight.w800,
+            color: Color(0xFF153D40),
+          ),
+        ),
+        const SizedBox(height: 12),
+        const Text(
+          'A steady page for your pen or finger.',
+          style: TextStyle(fontSize: 24, height: 1.4),
+        ),
+        const SizedBox(height: 16),
+        FilledButton.icon(
+          key: const ValueKey('open-writing-desk'),
+          onPressed: _open,
+          icon: const Icon(Icons.draw_outlined),
+          label: const Text('Start writing', style: TextStyle(fontSize: 26)),
+        ),
+        if (_matched)
+          const Padding(
+            padding: EdgeInsets.only(top: 16),
+            child: Text(
+              'Shape matched. Your practice was checked.',
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+            ),
+          ),
+        if (widget.onContinueWithoutWriting != null)
+          TextButton(
+            onPressed: widget.onContinueWithoutWriting,
+            child: const Text('Continue the story with help'),
+          ),
+      ],
+    ),
+  );
+}
+
+class InkPracticeWorkspace extends StatefulWidget {
+  const InkPracticeWorkspace({
+    super.key,
+    required this.target,
+    this.evidence,
+    this.onAccepted,
+    this.onEvidence,
+  });
+  final InkTarget target;
+  final List<Map<String, dynamic>>? evidence;
+  final VoidCallback? onAccepted;
+  final ValueChanged<Map<String, dynamic>>? onEvidence;
+  @override
+  State<InkPracticeWorkspace> createState() => _InkPracticeWorkspaceState();
+}
+
+class _InkPracticeWorkspaceState extends State<InkPracticeWorkspace> {
   late final InkController _ink;
   InkAssessment? _result;
   bool _submitting = false;
-  String? _saveStatus;
+  bool _edited = false;
+
   @override
   void initState() {
     super.initState();
@@ -39,34 +143,31 @@ class _InkPracticeCardState extends State<InkPracticeCard> {
 
   Future<void> _restore() async {
     final entries = widget.evidence ?? await InkEvidenceStore().read();
-    if (!mounted || _ink.attempt.strokes.isNotEmpty || _result != null) return;
-    final successes = entries
+    if (!mounted || _edited || _ink.attempt.strokes.isNotEmpty) return;
+    final previous = entries
         .where(
           (e) => e['target'] == widget.target.name && e['accepted'] == true,
         )
-        .toList();
-    final previous = successes.lastOrNull?['assistance'];
-    setState(() {
-      _ink.clear(
+        .lastOrNull?['assistance'];
+    setState(
+      () => _ink.clear(
         assistance: previous == null
             ? InkAssistance.guided
             : previous == 'guided'
             ? InkAssistance.copy
             : InkAssistance.recall,
-      );
-    });
+      ),
+    );
   }
 
   @override
-  void didUpdateWidget(covariant InkPracticeCard oldWidget) {
+  void didUpdateWidget(covariant InkPracticeWorkspace oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.target != widget.target) {
-      _ink.clear(target: widget.target, assistance: InkAssistance.guided);
+    if (oldWidget.target != widget.target ||
+        oldWidget.evidence != widget.evidence) {
+      _edited = false;
       _result = null;
-      _saveStatus = null;
-      _restore();
-    } else if (oldWidget.evidence != widget.evidence &&
-        _ink.attempt.strokes.isEmpty) {
+      _ink.clear(target: widget.target, assistance: InkAssistance.guided);
       _restore();
     }
   }
@@ -77,22 +178,26 @@ class _InkPracticeCardState extends State<InkPracticeCard> {
     super.dispose();
   }
 
-  void _reset({InkAssistance? assistance}) => setState(() {
-    _ink.clear(assistance: assistance);
-    _result = null;
-    _saveStatus = null;
-  });
+  void _reset({InkAssistance? assistance}) {
+    setState(() {
+      _edited = true;
+      _ink.clear(assistance: assistance);
+      _result = null;
+    });
+  }
+
   Future<void> _submit() async {
-    if (_submitting || _result != null) return;
+    if (_submitting || _result != null || _ink.isDrawing) return;
     final attempt = _ink.attempt;
     final result = InkRubric().assess(attempt);
     setState(() {
       _result = result;
       _submitting = true;
-      _saveStatus = 'Saving on this device…';
     });
+    // Feedback is shown before storage/network work; it never changes paper size.
+    unawaited(_showResult(result, attempt.assistance));
     final now = DateTime.now().toUtc();
-    final evidence = <String, dynamic>{
+    final event = <String, dynamic>{
       'id': 'ink-${now.microsecondsSinceEpoch}-${identityHashCode(attempt)}',
       'target': attempt.target.name,
       'assistance': attempt.assistance.name,
@@ -104,197 +209,245 @@ class _InkPracticeCardState extends State<InkPracticeCard> {
           .toSet()
           .toList(),
     };
-    widget.onEvidence?.call(evidence);
     try {
+      widget.onEvidence?.call(event);
       await InkEvidenceStore().record(attempt, result);
       if (result.accepted) await InkEvidenceStore().unlockCalligraphy();
-      if (mounted) {
-        setState(() {
-          _saveStatus = 'Practice evidence saved on this device.';
-        });
-      }
     } catch (_) {
       if (mounted) {
-        setState(() {
-          _saveStatus =
-              'Could not save on this device. Your result is still shown here.';
-        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Your writing was checked, but this device could not save the practice.',
+              style: TextStyle(fontSize: 24),
+            ),
+          ),
+        );
       }
+    } finally {
+      if (mounted) setState(() => _submitting = false);
     }
-    if (!mounted) return;
-    setState(() {
-      _submitting = false;
-    });
-    if (result.accepted) widget.onAccepted?.call();
+    if (mounted && result.accepted) widget.onAccepted?.call();
+  }
+
+  Future<void> _showResult(
+    InkAssessment result,
+    InkAssistance assistance,
+  ) => showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) => Dialog.fullscreen(
+      key: const ValueKey('writing-check-result'),
+      backgroundColor: const Color(0xFFFFF6DF),
+      child: SafeArea(
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                tooltip: 'Look at my writing',
+                constraints: const BoxConstraints(minWidth: 56, minHeight: 56),
+                onPressed: () => Navigator.pop(dialogContext),
+                icon: const Icon(Icons.close, size: 32),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24),
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 640),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Icon(
+                          result.accepted
+                              ? Icons.check_circle
+                              : Icons.edit_outlined,
+                          size: 72,
+                          color: const Color(0xFF153D40),
+                        ),
+                        const SizedBox(height: 20),
+                        Semantics(
+                          liveRegion: true,
+                          child: Text(
+                            result.accepted
+                                ? 'Shape matched!'
+                                : 'Checked · Try again',
+                            style: const TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          result.feedback,
+                          style: const TextStyle(fontSize: 26, height: 1.45),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: () {
+                    Navigator.pop(dialogContext);
+                    _reset(
+                      assistance:
+                          result.accepted && assistance != InkAssistance.recall
+                          ? InkAssistance.values[assistance.index + 1]
+                          : null,
+                    );
+                  },
+                  child: Text(
+                    result.accepted && assistance != InkAssistance.recall
+                        ? 'Less help'
+                        : 'Try again',
+                    style: const TextStyle(fontSize: 24),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+
+  void _options() {
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        scrollable: true,
+        title: Text(
+          'Writing ${widget.target.label}',
+          style: const TextStyle(fontSize: 32),
+        ),
+        content: SizedBox(
+          width: 500,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  widget.target.instruction,
+                  style: const TextStyle(fontSize: 26, height: 1.4),
+                ),
+                const SizedBox(height: 18),
+                for (final mode in InkAssistance.values)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(ctx);
+                        _reset(assistance: mode);
+                      },
+                      child: Text(switch (mode) {
+                        InkAssistance.guided => '1 · Trace',
+                        InkAssistance.copy => '2 · Copy',
+                        InkAssistance.recall => '3 · Recall',
+                      }, style: const TextStyle(fontSize: 24)),
+                    ),
+                  ),
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    showDialog<void>(
+                      context: context,
+                      builder: (_) => InkDemonstration(target: widget.target),
+                    );
+                  },
+                  icon: const Icon(Icons.play_arrow),
+                  label: const Text(
+                    'Watch a demo',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Checks compare this practice shape and its dots. They do not measure writing fluency.',
+                  style: TextStyle(fontSize: 24, height: 1.4),
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text(
+              'Back to writing',
+              style: TextStyle(fontSize: 24),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final assistance = _ink.attempt.assistance;
-    final target = widget.target;
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF1E7D5),
-        borderRadius: BorderRadius.circular(28),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            assistance == InkAssistance.recall
-                ? 'Recall ${target.label}'
-                : 'Write ${target.glyph}',
-            style: const TextStyle(
-              fontSize: 38,
-              fontWeight: FontWeight.w800,
-              color: Color(0xFF153D40),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            assistance == InkAssistance.recall
-                ? 'Write ${target.label} from memory on the blank label.'
-                : target.instruction,
-            style: const TextStyle(
-              fontSize: 24,
-              height: 1.45,
-              color: Color(0xFF153D40),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: InkAssistance.values
-                .map(
-                  (mode) => ChoiceChip(
-                    label: Text(switch (mode) {
-                      InkAssistance.guided => '1 · Trace',
-                      InkAssistance.copy => '2 · Copy',
-                      InkAssistance.recall => '3 · Recall',
-                    }, style: const TextStyle(fontSize: 22)),
-                    selected: assistance == mode,
-                    onSelected: _submitting
-                        ? null
-                        : (_) => _reset(assistance: mode),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 10,
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-          const SizedBox(height: 12),
-          if (assistance == InkAssistance.copy)
-            SizedBox(
-              height: 120,
-              child: CustomPaint(
-                painter: InkPainter(
-                  controller: InkController(target: target),
-                  showGuide: true,
-                ),
-              ),
-            ),
-          if (assistance == InkAssistance.recall)
-            const Padding(
-              padding: EdgeInsets.only(bottom: 12),
-              child: Text(
-                'The guide is hidden. Write from memory. You can return to Trace whenever you need it.',
-                style: TextStyle(fontSize: 22),
-              ),
-            ),
-          AbsorbPointer(
-            absorbing: _result != null || _submitting,
-            child: InkCanvas(
-              controller: _ink,
-              showGuide: assistance == InkAssistance.guided,
-              height: MediaQuery.sizeOf(context).width < 450 ? 280 : 330,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              FilledButton.icon(
-                onPressed: _result == null && !_submitting ? _submit : null,
+    return InkWorkspace(
+      title: switch (assistance) {
+        InkAssistance.guided => 'Trace ${widget.target.glyph}',
+        InkAssistance.copy => 'Copy ${widget.target.glyph}',
+        InkAssistance.recall => 'Recall ${widget.target.label}',
+      },
+      controller: _ink,
+      canvasAspectRatio: 1.25,
+      onClose: () => Navigator.pop(context),
+      onOptions: _options,
+      showGuide: assistance == InkAssistance.guided,
+      actions: AnimatedBuilder(
+        animation: _ink,
+        builder: (context, _) => Row(
+          children: [
+            Expanded(
+              child: FilledButton.icon(
+                key: const ValueKey('check-writing'),
+                onPressed: _result == null && !_submitting && !_ink.isDrawing
+                    ? _submit
+                    : null,
                 icon: const Icon(Icons.check),
-                label: const Text('Check my writing'),
-              ),
-              OutlinedButton.icon(
-                onPressed: _submitting ? null : () => _reset(),
-                icon: const Icon(Icons.refresh),
-                label: const Text('Try again'),
-              ),
-              OutlinedButton.icon(
-                onPressed: _result != null || _submitting ? null : _ink.undo,
-                icon: const Icon(Icons.undo),
-                label: const Text('Undo stroke'),
-              ),
-              TextButton.icon(
-                onPressed: _submitting
-                    ? null
-                    : () {
-                        _reset(assistance: InkAssistance.guided);
-                        showDialog<void>(
-                          context: context,
-                          builder: (_) => InkDemonstration(target: target),
-                        );
-                      },
-                icon: const Icon(Icons.play_arrow),
-                label: const Text('Watch a demo'),
-              ),
-            ],
-          ),
-          if (_result != null) ...[
-            const SizedBox(height: 16),
-            Semantics(
-              liveRegion: true,
-              child: Text(
-                _result!.feedback,
-                style: const TextStyle(
-                  fontSize: 26,
-                  height: 1.4,
-                  fontWeight: FontWeight.w700,
+                label: const Text(
+                  'Check my writing',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24),
                 ),
               ),
             ),
-            if (_result!.accepted && assistance != InkAssistance.recall)
-              Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: FilledButton(
-                  onPressed: _submitting
-                      ? null
-                      : () => _reset(
-                          assistance:
-                              InkAssistance.values[assistance.index + 1],
-                        ),
-                  child: const Text('Try with less help'),
-                ),
+            const SizedBox(width: 8),
+            IconButton(
+              tooltip: 'Try again',
+              onPressed: _submitting ? null : () => _reset(),
+              constraints: const BoxConstraints(minWidth: 56, minHeight: 56),
+              icon: const Icon(Icons.refresh, size: 30),
+            ),
+            IconButton(
+              tooltip: _result == null ? 'Undo stroke' : 'Show check result',
+              onPressed: _result == null
+                  ? _ink.undo
+                  : () => _showResult(_result!, assistance),
+              constraints: const BoxConstraints(minWidth: 56, minHeight: 56),
+              icon: Icon(
+                _result == null
+                    ? Icons.undo
+                    : _result!.accepted
+                    ? Icons.check_circle
+                    : Icons.info_outline,
+                size: 30,
               ),
+            ),
           ],
-          if (_saveStatus != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Text(_saveStatus!, style: const TextStyle(fontSize: 20)),
-            ),
-          if (widget.onContinueWithoutWriting != null)
-            TextButton(
-              onPressed: widget.onContinueWithoutWriting,
-              child: const Text('Continue the story with help'),
-            ),
-          const SizedBox(height: 12),
-          const Text(
-            'This checks one practice shape and its dots. It is not a test of fluent handwriting. The guide and tolerances still need Arabic educator review.',
-            style: TextStyle(
-              fontSize: 18,
-              height: 1.4,
-              color: Color(0xFF455B59),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -355,6 +508,7 @@ class _InkDemonstrationState extends State<InkDemonstration> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
+    scrollable: true,
     title: Text(
       'Watch ${widget.target.glyph}',
       style: const TextStyle(fontSize: 32),

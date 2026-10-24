@@ -38,3 +38,10 @@ a scoped Forge deployment service can execute it. No Google client secret is nee
 The requested Forge GitHub-connected Worker provisioning operation is documented
 in FORGE_DIAGNOSTICS.md. Push is performed once after final local checks; no
 repeated cloud builds are requested.
+
+Follow-up interaction fix: formation practice, free ink and ribbon activities now
+launch fixed, non-scrolling writing desks. Finger/stylus input owns its gesture;
+browser-native touch panning is disabled only during the writing route and restored
+on exit. Check results display immediately in a dedicated large-text panel. Browser
+touch drawing/submission and gesture restoration were verified locally. No new
+cloud deployment was requested for this fix.
