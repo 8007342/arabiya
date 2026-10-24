@@ -20,14 +20,18 @@ The app SHALL provide a single, menu-free entry flow that drops authenticated or
 - **WHEN** a first-time visitor opens the app without an existing session
 - **THEN** a warm animated vignette of **Tlatoāni**, **Covi**, and **mācron āi** appears with a **"Sign In to Resume / Save to Cloud"** action and an instant **"Start the Journey"** action, with no nested settings menus
 
-### Requirement: Animated Multi-Panel Playable Comic
+### Requirement: Full-Screen Composed Playable Comic with Auto-Play Voices
 
-Each chapter SHALL be presented as an interactive comic strip with expressive character animations (breathing, blinking, gill-fluttering, blushing, tail movement, camera transitions, and parallax depth) where **Tlatoāni** speaks in Spanish, **Covi** speaks in English, **mācron āi** reacts silently in the background with emoji-only speech bubbles, and local characters (**Nūr**, **Yāsmīn**, **Laylā**) speak vocalized Arabic.
+Each chapter SHALL be presented as a **100% full-screen playable comic (`100vw × 100vh`)** — never a form or card layout — composed of layered artwork assets (parallax Middle Eastern backdrops, midground architecture, high-resolution character sprite layers with breathing, gill-fluttering, and blushing poses, and foreground props). Dialogues SHALL be rendered inside **comic speech bubbles pointing directly to the speaking character**, with **auto-play voice narration** on every panel:
+- **Tlatoāni** speaks naturally in **Mexican Spanish (`es-MX`)** without redundant English translation subtitles.
+- **Covi** speaks naturally in **American English (`en-US`)** without redundant Spanish translation subtitles.
+- **mācron āi** reacts silently in the background with **emoji-only speech bubbles**.
+- **Nūr**, **Yāsmīn**, and **Laylā** speak vocalized Arabic (`ar`) with inline interactive Arabic word tokens and bundled calligraphic fonts (`NotoSansArabic`, `Amiri`, `NotoSans`, `NotoEmoji`) so Arabic glyphs and emojis never render as missing-glyph boxes (`☒`).
 
-#### Scenario: Advancing through a comic scene
+#### Scenario: Advancing through a full-screen comic scene
 
-- **WHEN** the player taps or interacts with a comic panel
-- **THEN** the camera transitions smoothly, the active speaker animates and voices their line, Arabic script words are highlighted with tap-to-hear *tashkīl* phonetics and Spanish/English cognate bridges, and **mācron āi** pops contextual emoji bubbles in the background
+- **WHEN** the player enters or taps a comic panel
+- **THEN** the full-screen camera and layered artwork transition smoothly, the active speaker's speech bubble appears with a tail pointing to them, their voice line auto-plays immediately, Arabic script words are highlighted inside the bubble for tap-to-hear *tashkīl* phonetics, and **mācron āi** pops contextual emoji bubbles in the background
 
 ### Requirement: Interactive Arabic Glyph Tracing & Mastery Gates with Rewind
 

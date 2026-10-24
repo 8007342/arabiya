@@ -3,104 +3,143 @@ import 'dart:js_interop';
 import 'package:web/web.dart' as web;
 import '../data/generated_voice_canon.dart';
 
-@JS(' eval')
-external JSAny? _jsEval(JSString code);
-
 class PlatformVoiceSynthesizer {
-  void speakText({
-    required String text,
-    required VoiceProfileCanon profile,
+  web.HTMLAudioElement? _player;
+  web.AudioContext? _audioCtx;
+  String? _pendingAssetUrl;
+  double _pendingRate = 1.0;
+  bool _unlockListenerAttached = false;
+
+  void _ensureUnlockListeners() {
+    if (_unlockListenerAttached) return;
+    _unlockListenerAttached = true;
+
+    void onUserGesture(web.Event _) {
+      try {
+        if (_audioCtx != null && _audioCtx!.state == 'suspended') {
+          _audioCtx!.resume();
+        }
+        if (_pendingAssetUrl != null) {
+          final url = _pendingAssetUrl!;
+          final rate = _pendingRate;
+          _pendingAssetUrl = null;
+          _playUrl(url, playbackRate: rate);
+        }
+      } catch (_) {}
+    }
+
+    web.window.addEventListener('pointerdown', onUserGesture.toJS);
+    web.window.addEventListener('keydown', onUserGesture.toJS);
+  }
+
+  void _playUrl(String url, {double playbackRate = 1.0}) {
+    _ensureUnlockListeners();
+    try {
+      _player?.pause();
+      final audio = web.HTMLAudioElement();
+      audio.src = url;
+      audio.volume = 1.0;
+      audio.playbackRate = playbackRate.clamp(0.75, 1.35);
+      _player = audio;
+      audio.play().toDart.catchError((Object _) {
+        // Browser blocked initial autoplay before first click/tap: queue for instant playback on first gesture!
+        _pendingAssetUrl = url;
+        _pendingRate = playbackRate;
+        return null;
+      });
+    } catch (_) {}
+  }
+
+  void speakPanelAsset({
+    required String panelId,
+    required String fallbackText,
+    required CharacterVoiceProfile profile,
     required bool isBlushing,
   }) {
     playHarmonicCue(
       profile: profile,
       isBlushing: isBlushing,
       isRewind: false,
+      subtle: true,
     );
-    if (profile.id == 'macron' || text.trim().isEmpty) {
+    final rate = (profile.rate + (isBlushing ? 0.03 : 0.0)).clamp(0.85, 1.15);
+    _playUrl('assets/assets/audio/panels/$panelId.mp3', playbackRate: rate);
+  }
+
+  void speakWordAsset({
+    required String? assetPath,
+    required String text,
+    required CharacterVoiceProfile profile,
+  }) {
+    playHarmonicCue(
+      profile: profile,
+      isBlushing: false,
+      isRewind: false,
+      subtle: true,
+    );
+    if (assetPath != null && assetPath.isNotEmpty) {
+      _playUrl('assets/$assetPath', playbackRate: 0.96);
       return;
     }
+    // Fallback to browser SpeechSynthesis if word wasn't in pre-baked manifest
     try {
       final synth = web.window.speechSynthesis;
       synth.cancel();
       final utterance = web.SpeechSynthesisUtterance(text);
       utterance.lang = profile.primaryLocale;
-      final pitch = (profile.pitch + (isBlushing ? profile.blushPitchDelta : 0.0))
-          .clamp(0.5, 1.8);
-      utterance.pitch = pitch;
-      utterance.rate = profile.rate.clamp(0.6, 1.5);
-
-      final voices = synth.getVoices().toDart;
-      final candidates = <String>[
-        profile.primaryLocale.toLowerCase(),
-        ...profile.fallbackLocales.map((l) => l.toLowerCase()),
-      ];
-      for (final target in candidates) {
-        final match = voices.where((v) {
-          final vLang = v.lang.replaceAll('_', '-').toLowerCase();
-          return vLang == target || vLang.startsWith('$target-');
-        });
-        if (match.isNotEmpty) {
-          utterance.voice = match.first;
-          utterance.lang = match.first.lang;
-          break;
-        }
-      }
+      utterance.pitch = profile.pitch;
+      utterance.rate = profile.rate;
       synth.speak(utterance);
-    } catch (_) {
-      // Fallback gracefully if speechSynthesis is restricted by browser autoplay policy.
-    }
+    } catch (_) {}
   }
 
   void playHarmonicCue({
-    required VoiceProfileCanon profile,
+    required CharacterVoiceProfile profile,
     required bool isBlushing,
     required bool isRewind,
+    bool subtle = false,
   }) {
+    _ensureUnlockListeners();
     try {
+      _audioCtx ??= web.AudioContext();
+      final ctx = _audioCtx!;
+      if (ctx.state == 'suspended') {
+        ctx.resume();
+      }
       final notes = isRewind
-          ? const [659.25, 523.25, 392.0]
+          ? const <num>[659.25, 523.25, 392.0]
           : profile.harmonicCadenceHz;
       if (notes.isEmpty) return;
       final shift = isBlushing ? 1.06 : 1.0;
-      final freqsJs = notes.map((f) => (f * shift).toStringAsFixed(1)).join(',');
-      final wave = profile.timbreWave;
-      final durationStep = profile.id == 'macron' ? 0.085 : 0.065;
-      final gainPeak = profile.id == 'macron' ? 0.07 : 0.04;
-      final script = '''
-(function() {
-  try {
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if (!Ctx) return;
-    if (!window.__arabiyaAudioCtx) {
-      window.__arabiyaAudioCtx = new Ctx();
-    }
-    const ctx = window.__arabiyaAudioCtx;
-    if (ctx.state === 'suspended') { ctx.resume(); }
-    const freqs = [$freqsJs];
-    const now = ctx.currentTime;
-    freqs.forEach((f, idx) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = '$wave';
-      osc.frequency.setValueAtTime(f, now + idx * $durationStep);
-      gain.gain.setValueAtTime(0.0001, now + idx * $durationStep);
-      gain.gain.exponentialRampToValueAtTime($gainPeak, now + idx * $durationStep + 0.015);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + (idx + 1) * $durationStep + 0.04);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now + idx * $durationStep);
-      osc.stop(now + (idx + 1) * $durationStep + 0.05);
-    });
-  } catch (_) {}
-})();
-''';
-      _jsEval(script.toJS);
+      final stepSec = profile.id == 'macron' ? 0.09 : 0.07;
+      final peakGain = subtle ? 0.045 : (profile.id == 'macron' ? 0.14 : 0.09);
+      final now = ctx.currentTime;
+
+      for (var i = 0; i < notes.length; i++) {
+        final freq = notes[i].toDouble() * shift;
+        final start = now + i * stepSec;
+        final stop = start + stepSec + 0.05;
+
+        final osc = ctx.createOscillator();
+        final gain = ctx.createGain();
+        osc.type = profile.timbreWave;
+        osc.frequency.setValueAtTime(freq, start);
+
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(peakGain, start + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, stop);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(stop + 0.01);
+      }
     } catch (_) {}
   }
 
   void stop() {
     try {
+      _player?.pause();
       web.window.speechSynthesis.cancel();
     } catch (_) {}
   }

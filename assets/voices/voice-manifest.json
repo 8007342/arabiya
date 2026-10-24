@@ -7,15 +7,15 @@
       "id": "tlatoani",
       "displayName": "Tlatoāni",
       "primaryLocale": "es-MX",
-      "fallbackLocales": ["es-ES", "es-419", "es"],
-      "pitch": 0.92,
-      "rate": 0.94,
+      "fallbackLocales": ["es-MX", "es-US", "es-419"],
+      "pitch": 0.96,
+      "rate": 0.98,
       "blushPitchDelta": 0.06,
-      "baseFreqHz": 220.0,
+      "baseFreqHz": 240.0,
       "timbreWave": "triangle",
-      "harmonicCadenceHz": [220, 277, 330],
-      "pauseBeforeInsightMs": 120,
-      "canonDescription": "Warm, unhurried Nahua-rooted Spanish sage voice; calm and observant, rising slightly with a gentle coral-gill flutter when blushing around Nūr, Yāsmīn, or Laylā."
+      "harmonicCadenceHz": [240, 302, 360],
+      "pauseBeforeInsightMs": 90,
+      "canonDescription": "Mexican Spanish sage voice (born in Mexico City, formative years in Guadalajara, currently living in Southern California); warm CDMX/Tapatío cadence, rising slightly with a gentle coral-gill flutter when blushing around Nūr, Yāsmīn, or Laylā."
     },
     "covi": {
       "id": "covi",

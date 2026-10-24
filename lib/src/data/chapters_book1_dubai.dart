@@ -209,11 +209,11 @@ final List<ComicChapterData> kBook1DubaiChapters = [
         tlatoaniEmotion: EmotionState.happy,
         coviEmotion: EmotionState.excited,
         dialogueText:
-            '¡Por fin aterrizamos en Dubái, Covi! Mira ese cartel sobre la puerta de embarque: tiene dos barquitos con un punto abajo (ب) y una columna en medio (ا).',
+            '¡Órale, Covi! Por fin aterrizamos en Dubái después del vuelo desde el sur de California. ¡Mira qué chido está ese letrero sobre la puerta: tiene dos barquitos con un punto abajo (ب) y una columna en medio (ا)!',
         dialogueTranslation:
-            'We finally landed in Dubai, Covi! Look at that sign above the boarding gate: it has two little boats with one dot underneath (ب) and a pillar in the middle (ا).',
+            'Whoa, Covi! We finally landed in Dubai after our flight from Southern California. Look how cool that sign above the gate is: it has two little boats with one dot underneath (ب) and a pillar in the middle (ا)!',
         spokenAudioText:
-            '¡Por fin aterrizamos en Dubái, Covi! Mira ese cartel sobre la puerta: dice bāb.',
+            '¡Órale, Covi! Por fin aterrizamos en Dubái desde el sur de California. Mira qué chido está ese letrero sobre la puerta: dice bāb.',
         spokenLocale: 'es-MX',
         arabicSpotlight: ArabicWordToken(
           arabic: 'بَاب',
@@ -291,11 +291,11 @@ final List<ComicChapterData> kBook1DubaiChapters = [
         coviEmotion: EmotionState.teasing,
         heroineEmotion: EmotionState.happy,
         dialogueText:
-            '¡M-Marḥaban, Nūr! Qué gusto... ¡Ojalá —digo, إِنْ شَاءَ اللّٰه (’in shā’a llāh)— podamos ver tus obras de caligrafía pronto!',
+            '¡M-Marḥaban, Nūr! Qué padre conocerte... Yo nací en la Ciudad de México, crecí en Guadalajara y vivo en el sur de California, ¡y ojalá —digo, إِنْ شَاءَ اللّٰه (’in shā’a llāh)— podamos ver tu caligrafía ahorita!',
         dialogueTranslation:
-            'M-Marḥaban, Nūr! Such a pleasure... Ojalá—I mean, إِنْ شَاءَ اللّٰه (’in shā’a llāh)—we can see your calligraphy works soon!',
+            'M-Marḥaban, Nūr! So great to meet you... I was born in Mexico City, grew up in Guadalajara, and live in Southern California, and ojalá—I mean, إِنْ شَاءَ اللّٰه (’in shā’a llāh)—we can see your calligraphy right now!',
         spokenAudioText:
-            '¡Marḥaban, Nūr! ¡Ojalá, in shā’a llāh, podamos ver tu caligrafía pronto!',
+            '¡Marḥaban, Nūr! Qué padre conocerte. ¡Ojalá, in shā’a llāh, podamos ver tu caligrafía ahorita!',
         spokenLocale: 'es-MX',
         arabicSpotlight: ArabicWordToken(
           arabic: 'إِنْ شَاءَ اللّٰه',
