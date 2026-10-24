@@ -10,9 +10,9 @@ Defines the canonical voice personalities for **Tlatoāni**, **Covi**, **Nūr**,
 
 Each character SHALL have a distinct, canonical voice profile stored in `assets/voices/voice-manifest.json` and enforced by the runtime audio synthesizer:
 
-1. **Tlatoāni (`tlatoani` — Spanish `es-MX` / `es-ES`):**
-   - **Personality:** Calm, wise, warm, quietly mischievous engineer-philosopher.
-   - **Acoustic Profile:** Mellow baritone-tenor (`pitch: 0.92`, `rate: 0.94`), warm low-mid resonance (`240 Hz` formant warmth), deliberate 120 ms micro-pause before insights, plus a subtle warm marimba/woodwind timbre cue when speaking. When blushing (`emotion: blushing`), pitch rises slightly (`+0.05`) with a gentle flutter.
+1. **Tlatoāni (`tlatoani` — Mexican Spanish `es-MX`, CDMX/Guadalajara/SoCal):**
+   - **Personality:** Calm, warm, witty engineer-philosopher born in Mexico City (CDMX), raised in Guadalajara, and living in Southern California.
+   - **Acoustic Profile:** Mellow Mexican Spanish tenor-baritone (`pitch: 0.96`, `rate: 0.98`, strictly `es-MX`, never `es-ES`), warm low-mid resonance (`240 Hz` formant warmth), melodic Tapatío/CDMX cadence, pre-synthesized neural MP3 voice lines (`assets/audio/panels/*.mp3`) + subtle marimba harmonic signature. When blushing (`emotion: blushing`), pitch rises slightly (`+0.05`) with a gentle flutter.
 2. **Covi (`covi` — English `en-US` / `en-GB`):**
    - **Personality:** Enthusiastic, curious, upbeat apprentice and supportive friend.
    - **Acoustic Profile:** Bright, clear voice (`pitch: 1.08`, `rate: 1.03`), lively inflection, accompanied by a soft plucked synth cue.

@@ -107,30 +107,49 @@ class _ArabicGlyphTracerState extends State<ArabicGlyphTracer> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 6,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF123E42),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  '${lesson.letter}  •  ${lesson.nameTranslit} (${lesson.nameArabic})',
-                  style: const TextStyle(
-                    color: Color(0xFFFFD166),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF123E42),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        '${lesson.letter} • ${lesson.nameTranslit} (${lesson.nameArabic})',
+                        style: const TextStyle(
+                          fontFamily: 'NotoSans',
+                          fontFamilyFallback: [
+                            'NotoSansArabic',
+                            'Amiri',
+                            'NotoEmoji',
+                          ],
+                          color: Color(0xFFFFD166),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 8),
+                  IconButton.filledTonal(
+                    tooltip: 'Hear Arabic pronunciation',
+                    onPressed: widget.onSpeakLetter,
+                    icon: const Icon(Icons.volume_up_rounded),
+                  ),
+                ],
               ),
-              const SizedBox(width: 8),
-              IconButton.filledTonal(
-                tooltip: 'Hear Arabic pronunciation',
-                onPressed: widget.onSpeakLetter,
-                icon: const Icon(Icons.volume_up_rounded),
-              ),
-              const Spacer(),
               if (_completed)
                 const Chip(
                   avatar: Icon(
@@ -138,14 +157,14 @@ class _ArabicGlyphTracerState extends State<ArabicGlyphTracer> {
                     color: Color(0xFF276D69),
                     size: 18,
                   ),
-                  label: Text('¡Trazo Dominado! / Traced!'),
+                  label: Text('¡Trazo Dominado!'),
                   backgroundColor: Color(0xFFD8F3DC),
                 )
               else
                 TextButton.icon(
                   onPressed: _completeDirectly,
                   icon: const Icon(Icons.auto_fix_high, size: 18),
-                  label: const Text('Demo & Complete Stroke'),
+                  label: const Text('Demo'),
                 ),
             ],
           ),
@@ -251,7 +270,9 @@ class _PositionalFormChip extends StatelessWidget {
             child: Text(
               glyph,
               style: const TextStyle(
-                fontSize: 19,
+                fontFamily: 'Amiri',
+                fontFamilyFallback: ['NotoSansArabic', 'NotoSans'],
+                fontSize: 21,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF123E42),
               ),
@@ -299,11 +320,13 @@ class _CalligraphyTracerPainter extends CustomPainter {
       text: TextSpan(
         text: lesson.letter,
         style: TextStyle(
+          fontFamily: 'Amiri',
+          fontFamilyFallback: const ['NotoSansArabic', 'NotoSans'],
           fontSize: size.height * 0.68,
           fontWeight: FontWeight.bold,
           color: completed
               ? const Color(0xFF276D69).withValues(alpha: 0.85)
-              : const Color(0xFF123E42).withValues(alpha: 0.18),
+              : const Color(0xFF123E42).withValues(alpha: 0.25),
         ),
       ),
       textDirection: TextDirection.rtl,

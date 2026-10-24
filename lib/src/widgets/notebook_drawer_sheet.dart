@@ -310,7 +310,7 @@ class TlatoaniNotebookSheet extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-            'Canonical Voice Manifest Seal: $kVoiceCanonHash\n'
+            'Canonical Voice Manifest Seal: $kVoiceCanonSealHash\n'
             'Source: assets/voices/voice-manifest.json • Pipeline: scripts/voice-pipeline.sh',
             style: const TextStyle(color: Color(0xFFFFD166), fontSize: 12),
           ),
@@ -330,47 +330,11 @@ class TlatoaniNotebookSheet extends StatelessWidget {
               ),
               trailing: FilledButton.tonalIcon(
                 onPressed: () {
-                  if (profile.id == 'macron') {
-                    voiceService.playMacronEmojiBloop();
-                  } else if (profile.id == 'tlatoani') {
-                    voiceService.speakPanel(
-                      const ComicPanelData(
-                        id: 'audition_tlatoani',
-                        backdrop: SceneBackdropType.alFahidiCafe,
-                        speaker: CharacterId.tlatoani,
-                        presentCharacters: [CharacterId.tlatoani],
-                        dialogueText: '',
-                        dialogueTranslation: '',
-                        spokenAudioText:
-                            '¡Hola! Soy Tlatoāni. El español y el árabe comparten raíces hermosas.',
-                        spokenLocale: 'es-MX',
-                        macronEmojis: '✨',
-                      ),
-                    );
-                  } else if (profile.id == 'covi') {
-                    voiceService.speakPanel(
-                      const ComicPanelData(
-                        id: 'audition_covi',
-                        backdrop: SceneBackdropType.alFahidiCafe,
-                        speaker: CharacterId.covi,
-                        presentCharacters: [CharacterId.covi],
-                        dialogueText: '',
-                        dialogueTranslation: '',
-                        spokenAudioText:
-                            'Hey there! I am Covi, and I am ready to learn Arabic with you!',
-                        spokenLocale: 'en-US',
-                        macronEmojis: '✨',
-                      ),
-                    );
-                  } else {
-                    voiceService.speakArabicWord(
-                      'مَرْحَباً! أَهْلاً وَسَهْلاً فِي العَرَبِيَّة.',
-                      heroine: CharacterId.values.firstWhere(
-                        (c) => c.name == profile.id,
-                        orElse: () => CharacterId.nur,
-                      ),
-                    );
-                  }
+                  final charId = CharacterId.values.firstWhere(
+                    (c) => c.name == profile.id,
+                    orElse: () => CharacterId.tlatoani,
+                  );
+                  voiceService.playCharacterAudition(charId);
                 },
                 icon: const Icon(Icons.play_arrow_rounded),
                 label: const Text('Audition'),

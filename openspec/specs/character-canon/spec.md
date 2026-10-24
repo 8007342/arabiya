@@ -8,12 +8,12 @@ Defines the immutable visual, linguistic, and behavioral rules for the cast of *
 
 ### Requirement: Tlatoāni Visual, Behavioral, and Linguistic Invariants
 
-**Tlatoāni** SHALL always be depicted as a small pink axolotl sage (`#F39A9A`) with coral feathery external gills (`#EC6F7B`), **exactly one tail** (never two), **no mustache or facial hair**, and a warm cream tunic (`#EFE0C4`) with blue-green/teal Nahua geometric accents (`#276D69` / `#5E8C7E`). All of Tlatoāni's spoken lines SHALL be in **Spanish** (interweaving Arabic words as he learns them). When charmed by **Nūr**, **Yāsmīn**, or **Laylā**, Tlatoāni's cheeks and feathery gills SHALL blush a vivid rose-coral while maintaining his gentle, respectful demeanor.
+**Tlatoāni** SHALL always be depicted as a small pink axolotl sage (`#F39A9A`) with coral feathery external gills (`#EC6F7B`), **exactly one tail** (never two), **no mustache or facial hair**, and a warm cream tunic (`#EFE0C4`) with blue-green/teal Nahua geometric accents (`#276D69` / `#5E8C7E`). Tlatoāni was **born in Mexico City (CDMX)**, spent most of his **formative years in Guadalajara (Jalisco)**, and **currently lives in Southern California (SoCal)**. All of Tlatoāni's spoken lines SHALL be in **Mexican Spanish (`es-MX`)** with authentic CDMX/Guadalajara/SoCal cadence and expressions (*¡Órale!, ¡Qué chido!, ¡Qué padre!, ¡No manches!, neta, ahorita, sale y vale, qué onda* — never Castilian Spain slang like *vale, mola, vosotros*), interweaving Arabic words as he learns them. When charmed by **Nūr**, **Yāsmīn**, or **Laylā**, Tlatoāni's cheeks and feathery gills SHALL blush a vivid rose-coral while maintaining his gentle, respectful demeanor.
 
 #### Scenario: Tlatoāni spots a Spanish-Arabic cognate or blushes
 
 - **WHEN** Tlatoāni notices an *Al-Andalus* linguistic pattern or speaks with **Nūr**, **Yāsmīn**, or **Laylā**
-- **THEN** he speaks in concise, warm Spanish (e.g., noting how *azúcar*, *aceite*, and *almohada* reveal Arabic Sun and Moon letters), and his gills flutter and blush when complimented
+- **THEN** he speaks in warm Mexican Spanish (`es-MX`, without redundant English translation subtitles), noting how *azúcar*, *aceite*, *almohada*, and *ojalá* connect Mexican Spanish directly to Arabic, and his gills flutter and blush when complimented
 
 ### Requirement: Covi Visual, Behavioral, and Linguistic Invariants
 

@@ -196,11 +196,11 @@ final List<ComicChapterData> kBook2LevantChapters = [
         coviEmotion: EmotionState.teasing,
         heroineEmotion: EmotionState.happy,
         dialogueText:
-            '¡Yāsmīn! Tu nombre es literalmente nuestro "jazmín" (يَاسْمِين)... y mira a mācron āi colgado feliz entre tus Tillandsias. ¡Incluso la palabra española "hasta" viene del árabe حَتَّى (ḥattā)!',
+            '¡No manches, Yāsmīn! Tu nombre es literalmente nuestro "jazmín" (يَاسْمِين)... Me recuerda muchísimo a los patios de Guadalajara donde crecí, ¡y mira a mācron āi bien a gusto entre tus Tillandsias! Hasta la palabra "hasta" viene del árabe حَتَّى (ḥattā).',
         dialogueTranslation:
-            'Yāsmīn! Your name is literally our Spanish word "jazmín" (يَاسْمِين)... and look at mācron āi hanging happily among your Tillandsias. Even the Spanish word "hasta" comes from Arabic حَتَّى (ḥattā)!',
+            'No way, Yāsmīn! Your name is literally our Spanish word "jazmín" (يَاسْمِين)... It reminds me so much of the courtyards in Guadalajara where I grew up, and look at mācron āi hanging happily among your Tillandsias! Even "hasta" comes from Arabic حَتَّى (ḥattā).',
         spokenAudioText:
-            '¡Yāsmīn! Tu nombre es nuestro jazmín, e incluso la palabra hasta viene de ḥattā.',
+            '¡No manches, Yāsmīn! Tu nombre es nuestro jazmín, como en los patios de Guadalajara donde crecí. Y hasta viene de ḥattā.',
         spokenLocale: 'es-MX',
         arabicSpotlight: ArabicWordToken(
           arabic: 'حَتَّى',
